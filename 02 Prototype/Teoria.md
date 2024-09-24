@@ -10,7 +10,7 @@
 
 # Prototype
 
-El patró de disseny **Prototype** ens permet crear còpies d’objectes sense que dependre de les seves classes.
+El patró de disseny **Prototype** ens permet crear còpies d’objectes sense dependre de les seves classes.
 
 Quan volem una còpia exacte d’un objecte tenim algun problema:
 
