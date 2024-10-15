@@ -59,3 +59,5 @@ public interface Dao<T> {
 - Separar la lògica de les dades pot implicar necessitar operacions “extra” per guardar les modificacions del model de dades
 
 ## Exemples
+
+Els exemples mostren com ineractuar amb dades **.json** o **SQLite** a través de **DAO**

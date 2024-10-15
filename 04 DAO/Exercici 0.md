@@ -12,7 +12,7 @@
 
 Crea un programa “Main.java” que implementi la gestió de dades (en arxius .json) d’un apassionat per la programació. La base de dades estarà en una carpeta tindrà els següents arxius .json:
 
-- llenguatges.json, conté una llista amb almenys 5 llenguatges de programació amb atributs:
+- **llenguatges.json**, conté una llista amb almenys 5 llenguatges de programació amb atributs:
 
     id (int, identificador del llenguatge a la base de dades)
     nom (String, nom del llenguatge)
@@ -20,14 +20,14 @@ Crea un programa “Main.java” que implementi la gestió de dades (en arxius .
     dificultat (String dificulttat de programar-lo entre facil, mitja i difícil)
 popularitat (int per ordenar-los segons popularitat)
 
-- eines.json, conté una llista amb almenys 5 eines de programació amb atributs
+- **eines.json**, conté una llista amb almenys 5 eines de programació amb atributs
 
     id (int, identificador de la eina la base de dades)
     nom (String, nom de la eina)
     any (int, any en què va aparèixer)
 llenguatges (arraylist amb els identificadors dels llenguatges que accepta)
 
-- software.json, conté una llista amb almenys 10 programes (o software) coneguts, desenvolupats amb els llenguatges i les eines anteriors
+- **software.json**, conté una llista amb almenys 10 programes (o software) coneguts, desenvolupats amb els llenguatges i les eines anteriors
 
     id (int, identificador del software a la base de dades)
     nom (String, nom del software)
@@ -36,13 +36,13 @@ llenguatges (arraylist amb els identificadors dels llenguatges amb què s’ha d
 
 Un cop tinguis aquesta base de dades:
 
-Crea els objectes Java que corresponent a cada tipus d’objecte anterior
+- Crea els objectes Java que corresponent a cada tipus d’objecte anterior
 
-(ObjEina.java, ObjLlenguatge.java i ObjSoftware.java)
+    (ObjEina.java, ObjLlenguatge.java i ObjSoftware.java)
 
-Per cada un d’aquests objectes JAVA crea el Dao corresponent basat en CRUD
+- Per cada un d’aquests objectes JAVA crea el Dao corresponent basat en CRUD
 
-(DaoEina.java, DaoLlenguatge.java, DaoSoftware.java)
+    (DaoEina.java, DaoLlenguatge.java, DaoSoftware.java)
 
 Fes funcions Update específiques per cada atribut, al seu Dao corresponent, és a dir:
 
