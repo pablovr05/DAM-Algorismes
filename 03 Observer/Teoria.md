@@ -59,7 +59,7 @@ obsNum.setValue(2);
 
 ## Disseny
 
-<center><img src="./assets/observer.png" style="max-width: 90%; max-height: 400px;" alt="">
+<center><img src="./assets/observer.png" style="max-width: 90%; width: 400px; max-height: 400px;" alt="">
 <br/></center>
 <br/>
 
