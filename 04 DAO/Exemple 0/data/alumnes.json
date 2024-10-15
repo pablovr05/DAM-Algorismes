@@ -1,0 +1,43 @@
+[
+    {
+        "cursos": [
+            0,
+            1
+        ],
+        "id": 0,
+        "nom": "Albert Einstein"
+    },
+    {
+        "cursos": [
+            1,
+            2
+        ],
+        "id": 1,
+        "nom": "Charles Darwin"
+    },
+    {
+        "cursos": [
+            0,
+            2,
+            3
+        ],
+        "id": 2,
+        "nom": "Isaac Newton"
+    },
+    {
+        "cursos": [
+            3,
+            4
+        ],
+        "id": 3,
+        "nom": "Barbara McClintock"
+    },
+    {
+        "cursos": [
+            0,
+            4
+        ],
+        "id": 4,
+        "nom": "Rachel Carson"
+    }
+]
