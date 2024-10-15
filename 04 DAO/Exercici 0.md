@@ -153,8 +153,30 @@ public class Main {
        daoSoftware.delete(10);
    }
 }
-
+```
 
 <center><img src="./assets/SortidaEx0.png" style="max-width: 90%; width: 400px; max-height: 400px;" alt="">
 <br/></center>
 <br/>
+
+Sortida esperada:
+```text
+Eina: 0 Visual Studio Code, 2015 - [0, 1, 2, 3, 4]
+Eina: 1 Xcode, 2003 - [0, 1, 2]
+Eina: 2 Eclipse, 2001 - [4]
+Eina: 3 Vim, 1991 - [0, 1, 2, 3, 4]
+Eina: 4 Nano, 1999 - [0, 1, 2, 3, 4]
+Eina: 5 TextEdit, 2001 - [0, 1, 3]
+Llenguatge: 0 C, 1972 - dificil/8
+Llenguatge: 1 C++, 1983 - mitja/7
+Llenguatge: 2 Objective C, 1984 - dificil/2
+Llenguatge: 3 JavaScript, 1996 - facil/6
+Llenguatge: 4 Java, 1995 - mitja/5
+Llenguatge: 5 Dart+Flutter, 2018 - mitja/9
+Software: 0 Visual Studio Code, 2015 - [0, 1, 2, 3, 4]
+Software: 1 Xcode, 2003 - [0, 1, 2]
+Software: 2 Eclipse, 2001 - [4]
+Software: 3 Vim, 1991 - [0, 1, 2, 3, 4]
+Software: 4 Nano, 1999 - [0, 1, 2, 3, 4]
+Software: 10 webTool, 2022 - [3]
+```
