@@ -42,22 +42,22 @@
     </pluginRepository>
   </pluginRepositories>
   <build>
-    <sourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/src/main/scripts</scriptSourceDirectory>
-    <testSourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/src/test/java</testSourceDirectory>
-    <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/classes</outputDirectory>
-    <testOutputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/test-classes</testOutputDirectory>
+    <sourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/src/main/java</sourceDirectory>
+    <scriptSourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/src/main/scripts</scriptSourceDirectory>
+    <testSourceDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/src/test/java</testSourceDirectory>
+    <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/classes</outputDirectory>
+    <testOutputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/test-classes</testOutputDirectory>
     <resources>
       <resource>
-        <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/src/main/resources</directory>
+        <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/src/main/resources</directory>
       </resource>
     </resources>
     <testResources>
       <testResource>
-        <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/src/test/resources</directory>
+        <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/src/test/resources</directory>
       </testResource>
     </testResources>
-    <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target</directory>
+    <directory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target</directory>
     <finalName>project-name-1.0.0</finalName>
     <pluginManagement>
       <plugins>
@@ -217,7 +217,7 @@
               <goal>site</goal>
             </goals>
             <configuration>
-              <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/site</outputDirectory>
+              <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/site</outputDirectory>
               <reportPlugins>
                 <reportPlugin>
                   <groupId>org.apache.maven.plugins</groupId>
@@ -233,7 +233,7 @@
               <goal>deploy</goal>
             </goals>
             <configuration>
-              <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/site</outputDirectory>
+              <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/site</outputDirectory>
               <reportPlugins>
                 <reportPlugin>
                   <groupId>org.apache.maven.plugins</groupId>
@@ -244,7 +244,7 @@
           </execution>
         </executions>
         <configuration>
-          <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/site</outputDirectory>
+          <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/site</outputDirectory>
           <reportPlugins>
             <reportPlugin>
               <groupId>org.apache.maven.plugins</groupId>
@@ -256,7 +256,7 @@
     </plugins>
   </build>
   <reporting>
-    <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-ServeisProcessos/00 Processos/Exemple 0000/target/site</outputDirectory>
+    <outputDirectory>/Users/albertpalaciosjimenez/Documents/GitHub/DAM-Algorismes/03 Observer/Exemple 0300/target/site</outputDirectory>
   </reporting>
   <profiles>
     <profile>

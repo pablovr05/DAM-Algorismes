@@ -83,7 +83,7 @@ public class Main {
             {0, 1, 1, 1}, // 7 (senar)
         };
 
-        // Etiquetes de sortida (0 per parell, 1 per senar)
+        // Sortides corresponents a les entrades anteriors (0 per parell, 1 per senar)
         int[] labels = {0, 1, 0, 1, 0, 1, 0, 1};
 
         // Entrenar el perceptró
