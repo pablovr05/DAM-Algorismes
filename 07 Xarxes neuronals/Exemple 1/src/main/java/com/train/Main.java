@@ -27,7 +27,7 @@ public class Main {
     private static final int EPOCHS = 10; // Èpoques d'entrenament
     private static final int WIDTH = 64;  // Mida de les imatges entrenades 64x64
     private static final int HEIGHT = 64; 
-    private static final int CHANNELS = 1; // Imatges entrenades amb tons de gris (per imatges en color seria 3)
+    private static final int CHANNELS = 3; // Imatges entrenades amb tons de gris (per imatges en color seria 3)
     private static final int BATCH_SIZE = 32; // Agrupar les imatges en lots (batches) de 32 abans d'ajustar pesos
     private static final int NUM_CLASSES = 2; // Categories que s'han de classificar (dues vol dir 'smile' i 'non_smile')
     

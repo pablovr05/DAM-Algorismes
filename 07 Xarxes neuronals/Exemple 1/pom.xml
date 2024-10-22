@@ -63,14 +63,12 @@
             <artifactId>datavec-api</artifactId>
             <version>1.0.0-M2.1</version>
         </dependency>
-
         <!-- DataVec: Processament d'imatges -->
         <dependency>
             <groupId>org.datavec</groupId>
             <artifactId>datavec-data-image</artifactId>
             <version>1.0.0-M2.1</version>
         </dependency>
-
         <!-- DL4J UI (opcional, per veure gràfics durant l'entrenament) -->
         <dependency>
             <groupId>org.deeplearning4j</groupId>

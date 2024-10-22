@@ -13,13 +13,10 @@ public class Main {
 
     private static final int WIDTH = 64;
     private static final int HEIGHT = 64;
-    private static final int CHANNELS = 1;
+    private static final int CHANNELS = 3;
 
-    public static void classifyAndCheck(String imagePath, boolean expectedSmile) throws IOException {
+    public static void classifyAndCheck(MultiLayerNetwork model, String imagePath, boolean expectedSmile) throws IOException {
 
-        // Carregar el model entrenat
-        MultiLayerNetwork model = MultiLayerNetwork.load(new File("trained_model.zip"), true);
-    
         // Selecciona la imatge per fer la predicció
         File testFile = new File(imagePath);
     
@@ -49,11 +46,11 @@ public class Main {
         MultiLayerNetwork model = MultiLayerNetwork.load(new File("trained_model.zip"), true);
         System.out.println("Model carregat correctament.");
 
-        classifyAndCheck("data/test/George_W_Bush_0047.jpg", false);
-        classifyAndCheck("data/test/Abdullah_0001.jpg", false);
-        classifyAndCheck("data/test/Bill_Paxton_0002.jpg", true);
-        classifyAndCheck("data/test/Annette_Bening_0002.jpg", true);
-        classifyAndCheck("data/test/Elizabeth_Regan_0001.jpg", true);
-        classifyAndCheck("data/test/Nancy_Pelosi_0001.jpg", false);
+        classifyAndCheck(model, "data/test/George_W_Bush_0047.jpg", false);
+        classifyAndCheck(model, "data/test/Abdullah_0001.jpg", false);
+        classifyAndCheck(model, "data/test/Bill_Paxton_0002.jpg", true);
+        classifyAndCheck(model, "data/test/Annette_Bening_0002.jpg", true);
+        classifyAndCheck(model, "data/test/Elizabeth_Regan_0001.jpg", true);
+        classifyAndCheck(model, "data/test/Nancy_Pelosi_0001.jpg", false);
     }
 }

@@ -10,76 +10,12 @@
 
 # Exercici 0
 
-Fes tres perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
+Modifica l'arxiu 'classify' per tal de classificar més mostres i obtenir una estadística d'encerts i errades. Per fer-ho:
 
-- **El perceptró 0** detecta si hi ha una linia diagonal:
+- Hauràs de definir per un conjunt d'almenys 50 mostres, una relació entre el nom de l'arxiu *.jpg* i si somriu o no somriu.
 
-```text
-1 0 0          0 0 1
-0 1 0          0 1 0
-0 0 1          1 0 0
-```
-- **El perceptró 1** detecta si hi ha una linia vertical:
+- Fer una funció **calculateAccuracy** que digui el percentatge d'encert del model entrenat, segons el conjunt de mostres anterior.
 
-```text
-1 0 0          0 1 0          0 0 1
-1 0 0          0 1 0          0 0 1
-1 0 0          0 1 0          0 0 1
-```
+- Modifica els paràmetres actuals, per millorar l'encert del model. 
 
-- **El perceptró 2** detecta si hi ha una linia horitzontal:
-
-```text
-1 1 1          0 0 0          0 0 0
-0 0 0          1 1 1          0 0 0
-0 0 0          0 0 0          1 1 1
-```
-
-Entrena els perceptrons amb diferents valors **EPOCH**.
-
-Comprova el percentatge d'encert de cada perceptró per diferents entrades i mostra els resultats d'executar l'algorisme amb diferents matrius aleatòries.
-
-- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 50%?
-- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 80%?
-
-**Nota**: Fes servir la següent funció per generar totes les combinacions de matrius possibles. 
-
-Veureu que genera matrius d'una dimensió amb nou valors, és a dir:
-
-```text
-1 0 1
-0 1 0 es representa com: 1 0 1 0 1 0 0 1 0
-0 1 0
-```
-
-Funció per generar totes les matrius possibles:
-```java
-public static List<int[]> generateAllMatrices() {
-    List<int[]> matrices = new ArrayList<>();
-    
-    // Hi ha 2^9 combinacions possibles
-    for (int i = 0; i < 512; i++) {
-        int[] matrix = new int[9];
-        
-        // Convertir l'índex `i` a una combinació binària de 9 bits
-        String binary = String.format("%9s", Integer.toBinaryString(i)).replace(' ', '0');
-        
-        // Omplir l'array amb els bits corresponents
-        for (int j = 0; j < 9; j++) {
-            matrix[j] = binary.charAt(j) - '0';
-        }
-        
-        matrices.add(matrix);
-    }
-    
-    return matrices;
-}
-```
-
-Per tant la següent matriu activa el perceptró "diagonal":
-
-```text
-1 0 0
-0 1 0 es representa com: 1 0 0 0 1 0 0 0 1
-0 0 1
-```
+- Fes un document **.pdf** amb la millor configuració de paràmetres que has trobat, i perquè creus que dóna millors resultats.
