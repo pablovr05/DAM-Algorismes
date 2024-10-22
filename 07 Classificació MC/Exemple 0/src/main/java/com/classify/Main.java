@@ -11,8 +11,8 @@ import java.io.IOException;
 
 public class Main {
 
-    private static final int WIDTH = 64;
-    private static final int HEIGHT = 64;
+    private static final int WIDTH = 128;
+    private static final int HEIGHT = 128;
     private static final int CHANNELS = 1;
     private static final String[] VEHICLE_CLASSES = { 
         // En el mateix ordre que s'ha generat l'entrenament (alfabètic)
@@ -39,7 +39,7 @@ public class Main {
             // output[1] = probabilitat que sigui 'family_sedan'
             // ...
 
-            INDArray predictionArray = Nd4j.argMax(output, 1) 
+            INDArray predictionArray = Nd4j.argMax(output, 1);
             // predictionArray array d'un sol element amb l'index de la probabilitat més alta de 'output'
 
             int predictedClass = predictionArray.getInt(0);
