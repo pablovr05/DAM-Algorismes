@@ -14,8 +14,12 @@ public class Main {
     private static final int WIDTH = 64;
     private static final int HEIGHT = 64;
     private static final int CHANNELS = 1;
-    private static final String[] VEHICLE_CLASSES = {"SUV", "family_sedan", "heavy_truck", "minibus", "taxi", "bus", "fire_engine", "jeep", "racing_car", "truck"}; 
-
+    private static final String[] VEHICLE_CLASSES = { 
+        // En el mateix ordre que s'ha generat l'entrenament (alfabètic)
+        "bus", "family_sedan", "fire_engine", "heavy_truck", 
+        "jeep", "minibus", "racing_car", "SUV", "taxi", "truck"
+    };
+    
     public static void classifyAndCheck(MultiLayerNetwork model, String imagePath, String label) throws IOException {
 
         // Selecciona la imatge per fer la predicció
@@ -30,15 +34,23 @@ public class Main {
     
             // Predicció
             INDArray output = model.output(image);
-            int predictedClass = Nd4j.argMax(output, 1).getInt(0);
+            // output és un array on cada etiqueta té la probabilitat d'encert 
+            // output[0] = probabilitat que sigui 'bus'
+            // output[1] = probabilitat que sigui 'family_sedan'
+            // ...
+
+            INDArray predictionArray = Nd4j.argMax(output, 1) 
+            // predictionArray array d'un sol element amb l'index de la probabilitat més alta de 'output'
+
+            int predictedClass = predictionArray.getInt(0);
+            // index de l'etiqueta amb més probabilitat (0 per 'bus', 1 per 'family_sedan', ...)
             
             // Mostra la probabilitat de ser cada tipus de vehicle
-            System.out.println("Resultat \"" + testFile.getName() + "\":");
+            System.out.println("Resultat '" + testFile.getName() + "'':");
             for (int i = 0; i < VEHICLE_CLASSES.length; i++) {
-                System.out.printf("%s: %.2f%%\n", VEHICLE_CLASSES[i], output.getFloat(i) * 100);
+                System.out.printf("  - %s: %.2f%%\n", VEHICLE_CLASSES[i], output.getFloat(i) * 100);
             }
-            
-            System.out.println("Predicció: " + VEHICLE_CLASSES[predictedClass] + " - Esperat: " + label + "\n");
+            System.out.println("  Predicció: '" + VEHICLE_CLASSES[predictedClass] + "'' - Esperat: '" + label + "'\n");
         } else {
             System.out.println("L'arxiu de test no es troba: " + testFile.getPath());
         }

@@ -28,11 +28,20 @@ public class Main {
             scaler.transform(image);
     
             // Predicció
-            INDArray output = model.output(image);
-            int predictedClass = Nd4j.argMax(output, 1).getInt(0);
+            INDArray output = model.output(image); 
+            // output és un array on cada etiqueta té la probabilitat d'encert 
+            // output[0] = probabilitat que sigui 'non_smile'
+            // output[1] = probabilitat que sigui 'smile'
+            // L'ordre és 'non_smile', 'smile' perquè s'ordena el nom de les carpetes alfabèticament
+
+            INDArray predictionArray = Nd4j.argMax(output, 1) 
+            // predictionArray array d'un sol element amb l'index de la probabilitat més alta de 'output'
+
+            int predictedClass = predictionArray.getInt(0);
+            // index de l'etiqueta amb més probabilitat (0 per 'non_smile', 1 per 'smile')
+
             boolean predictedSmile = (predictedClass == 1);
     
-   
             boolean isCorrect = (predictedSmile == expectedSmile);           
             System.out.println("Resultat \"" + testFile.getName() + "\": " + (predictedSmile ? "smile" : "non_smile") + " > " + (isCorrect ? "Correcte" : "Incorrecte"));
         } else {

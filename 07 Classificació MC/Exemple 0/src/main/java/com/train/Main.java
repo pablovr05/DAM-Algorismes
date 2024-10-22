@@ -28,11 +28,11 @@ import java.io.File;
 
 public class Main {
 
-    private static final int EPOCHS = 25;
-    private static final int WIDTH = 128;
-    private static final int HEIGHT = 128;
+    private static final int EPOCHS = 15;
+    private static final int WIDTH = 64;
+    private static final int HEIGHT = 64;
     private static final int CHANNELS = 1;
-    private static final int BATCH_SIZE = 32;
+    private static final int BATCH_SIZE = 24;
     private static final int NUM_CLASSES = 10;
 
     public static void main(String[] args) throws Exception {
