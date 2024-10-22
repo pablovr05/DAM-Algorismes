@@ -5,7 +5,7 @@ import java.util.*;
 public class Main {
 
     // Provar diferents EPOCHS: 1, 2, ... 10
-    private static final int EPOCHS = 10; 
+    private static final int EPOCHS = 1; 
 
     private double[] weights;
     private double bias;
