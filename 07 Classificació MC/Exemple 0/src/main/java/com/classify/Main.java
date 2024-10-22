@@ -50,7 +50,8 @@ public class Main {
             for (int i = 0; i < VEHICLE_CLASSES.length; i++) {
                 System.out.printf("  - %s: %.2f%%\n", VEHICLE_CLASSES[i], output.getFloat(i) * 100);
             }
-            System.out.println("  Predicció: '" + VEHICLE_CLASSES[predictedClass] + "'' - Esperat: '" + label + "'\n");
+            System.out.println("  * Predicció: '" + VEHICLE_CLASSES[predictedClass] + "'");
+            System.out.println("  * Esperat: '" + label + "'\n");
         } else {
             System.out.println("L'arxiu de test no es troba: " + testFile.getPath());
         }
