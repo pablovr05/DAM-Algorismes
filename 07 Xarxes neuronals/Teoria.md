@@ -327,9 +327,9 @@ Durant l'entrenament es veuen la següent informació:
 
 - **Score**: és una mesura del rendiment del model en cada iteració, indicant quantitat de pèrdua (loss) que té el model després d'aquella iteració.
 
-    En aquest context, el score és una mesura de la funció de pèrdua que el model intenta minimitzar durant l'entrenament. Valors de score més baixos indiquen un millor rendiment, ja que la pèrdua és menor.
-
-    És una manera de monitoritzar com el model està aprenent i ajustant-se a les dades a mesura que avança l'entrenament.
+    En aquest context, el score és una mesura de la funció de pèrdua que el model intenta minimitzar durant l'entrenament. 
+    
+    **Valors de score més baixos** indiquen un millor rendiment, ja que la pèrdua és menor.
 
 Un cop entrenat el model, ja es pot guardar en un arxiu per fer-lo servir més tard en altres aplicacions.
 
