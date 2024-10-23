@@ -10,16 +10,16 @@
 
 # Exercici 0
 
-Fes tres perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
+Fes servir la classe 'Perceptron' per instanciar 3 perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
 
-- **El perceptró 0** detecta si hi ha una linia diagonal:
+- **perceptronDiagonal** detecta si hi ha una linia diagonal:
 
 ```text
 1 0 0          0 0 1
 0 1 0          0 1 0
 0 0 1          1 0 0
 ```
-- **El perceptró 1** detecta si hi ha una linia vertical:
+- **perceptronVertical** detecta si hi ha una linia vertical:
 
 ```text
 1 0 0          0 1 0          0 0 1
@@ -27,7 +27,7 @@ Fes tres perceptrons que classifiquin matrius de 3x3 entre matrius que tenen lin
 1 0 0          0 1 0          0 0 1
 ```
 
-- **El perceptró 2** detecta si hi ha una linia horitzontal:
+- **perceptronHorizontal** detecta si hi ha una linia horitzontal:
 
 ```text
 1 1 1          0 0 0          0 0 0
