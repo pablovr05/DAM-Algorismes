@@ -1,0 +1,5 @@
+2024-10-23 18:55:43,710 [INFO] Utilitzant dispositiu: cpu
+2024-10-23 18:55:43,711 [INFO] Carregant dataset...
+2024-10-23 18:55:43,717 [INFO] Dataset carregat: 680 imatges d'entrenament, 170 de validació
+2024-10-23 18:55:43,717 [INFO] Classes trobades: ['cat', 'non_cat']
+2024-10-23 18:55:43,999 [INFO] Model creat amb 1537 paràmetres entrenables

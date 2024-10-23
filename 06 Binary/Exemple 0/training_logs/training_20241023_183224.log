@@ -1,0 +1,43 @@
+2024-10-23 18:32:24,915 [INFO] Utilitzant dispositiu: mps
+2024-10-23 18:32:24,915 [INFO] Carregant dataset...
+2024-10-23 18:32:24,927 [INFO] Dataset carregat: 680 imatges d'entrenament, 170 de validació
+2024-10-23 18:32:24,927 [INFO] Classes trobades: ['cat', 'non_cat']
+2024-10-23 18:32:25,268 [INFO] Model creat amb 2050 paràmetres entrenables
+2024-10-23 18:32:56,984 [INFO] Època 1/30 - Train Loss: 0.6814, Train Acc: 63.09% - Val Loss: 0.5550, Val Acc: 70.00% - LR: 0.000100
+2024-10-23 18:32:56,986 [INFO] Guardant millor model amb accuracy 70.00%
+2024-10-23 18:33:28,504 [INFO] Època 2/30 - Train Loss: 0.5677, Train Acc: 69.56% - Val Loss: 0.4771, Val Acc: 80.00% - LR: 0.000100
+2024-10-23 18:33:28,506 [INFO] Guardant millor model amb accuracy 80.00%
+2024-10-23 18:34:01,281 [INFO] Època 3/30 - Train Loss: 0.4978, Train Acc: 77.06% - Val Loss: 0.4069, Val Acc: 84.71% - LR: 0.000100
+2024-10-23 18:34:01,283 [INFO] Guardant millor model amb accuracy 84.71%
+2024-10-23 18:34:30,855 [INFO] Època 4/30 - Train Loss: 0.4377, Train Acc: 79.71% - Val Loss: 0.3677, Val Acc: 87.06% - LR: 0.000100
+2024-10-23 18:34:30,857 [INFO] Guardant millor model amb accuracy 87.06%
+2024-10-23 18:35:04,848 [INFO] Època 5/30 - Train Loss: 0.4043, Train Acc: 81.76% - Val Loss: 0.3383, Val Acc: 88.82% - LR: 0.000100
+2024-10-23 18:35:04,850 [INFO] Guardant millor model amb accuracy 88.82%
+2024-10-23 18:35:35,206 [INFO] Època 6/30 - Train Loss: 0.3421, Train Acc: 87.50% - Val Loss: 0.3073, Val Acc: 88.82% - LR: 0.000100
+2024-10-23 18:36:05,212 [INFO] Època 7/30 - Train Loss: 0.3525, Train Acc: 86.91% - Val Loss: 0.2849, Val Acc: 91.18% - LR: 0.000100
+2024-10-23 18:36:05,214 [INFO] Guardant millor model amb accuracy 91.18%
+2024-10-23 18:36:34,760 [INFO] Època 8/30 - Train Loss: 0.3241, Train Acc: 87.79% - Val Loss: 0.2703, Val Acc: 90.00% - LR: 0.000100
+2024-10-23 18:37:06,087 [INFO] Època 9/30 - Train Loss: 0.3062, Train Acc: 89.85% - Val Loss: 0.2667, Val Acc: 89.41% - LR: 0.000100
+2024-10-23 18:37:35,788 [INFO] Època 10/30 - Train Loss: 0.2833, Train Acc: 90.00% - Val Loss: 0.2533, Val Acc: 89.41% - LR: 0.000100
+2024-10-23 18:38:05,281 [INFO] Època 11/30 - Train Loss: 0.2980, Train Acc: 88.09% - Val Loss: 0.2506, Val Acc: 89.41% - LR: 0.000100
+2024-10-23 18:38:34,851 [INFO] Època 12/30 - Train Loss: 0.2841, Train Acc: 89.71% - Val Loss: 0.2258, Val Acc: 92.94% - LR: 0.000100
+2024-10-23 18:38:34,852 [INFO] Guardant millor model amb accuracy 92.94%
+2024-10-23 18:39:04,130 [INFO] Època 13/30 - Train Loss: 0.2787, Train Acc: 89.56% - Val Loss: 0.2219, Val Acc: 91.76% - LR: 0.000100
+2024-10-23 18:39:34,052 [INFO] Època 14/30 - Train Loss: 0.2818, Train Acc: 88.24% - Val Loss: 0.2149, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:39:34,054 [INFO] Guardant millor model amb accuracy 93.53%
+2024-10-23 18:40:03,719 [INFO] Època 15/30 - Train Loss: 0.2680, Train Acc: 88.82% - Val Loss: 0.2165, Val Acc: 92.35% - LR: 0.000100
+2024-10-23 18:40:32,755 [INFO] Època 16/30 - Train Loss: 0.2413, Train Acc: 92.35% - Val Loss: 0.2027, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:41:01,915 [INFO] Època 17/30 - Train Loss: 0.2536, Train Acc: 90.88% - Val Loss: 0.2121, Val Acc: 91.18% - LR: 0.000100
+2024-10-23 18:41:33,292 [INFO] Època 18/30 - Train Loss: 0.2313, Train Acc: 90.74% - Val Loss: 0.1982, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:42:05,173 [INFO] Època 19/30 - Train Loss: 0.2271, Train Acc: 91.76% - Val Loss: 0.1953, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:42:36,630 [INFO] Època 20/30 - Train Loss: 0.2419, Train Acc: 89.85% - Val Loss: 0.1931, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:43:04,442 [INFO] Època 21/30 - Train Loss: 0.2142, Train Acc: 91.91% - Val Loss: 0.1939, Val Acc: 92.94% - LR: 0.000100
+2024-10-23 18:43:35,883 [INFO] Època 22/30 - Train Loss: 0.2157, Train Acc: 91.91% - Val Loss: 0.1817, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:44:06,356 [INFO] Època 23/30 - Train Loss: 0.2179, Train Acc: 92.06% - Val Loss: 0.1822, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:44:36,471 [INFO] Època 24/30 - Train Loss: 0.2268, Train Acc: 91.03% - Val Loss: 0.1943, Val Acc: 92.35% - LR: 0.000100
+2024-10-23 18:45:07,629 [INFO] Època 25/30 - Train Loss: 0.1993, Train Acc: 92.35% - Val Loss: 0.1868, Val Acc: 92.94% - LR: 0.000100
+2024-10-23 18:45:38,481 [INFO] Època 26/30 - Train Loss: 0.2070, Train Acc: 92.50% - Val Loss: 0.1727, Val Acc: 92.94% - LR: 0.000100
+2024-10-23 18:46:08,592 [INFO] Època 27/30 - Train Loss: 0.2417, Train Acc: 90.59% - Val Loss: 0.1742, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:46:38,660 [INFO] Època 28/30 - Train Loss: 0.1950, Train Acc: 92.21% - Val Loss: 0.1711, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:47:08,783 [INFO] Època 29/30 - Train Loss: 0.1973, Train Acc: 92.65% - Val Loss: 0.1769, Val Acc: 93.53% - LR: 0.000100
+2024-10-23 18:47:38,421 [INFO] Època 30/30 - Train Loss: 0.1916, Train Acc: 92.94% - Val Loss: 0.1744, Val Acc: 93.53% - LR: 0.000100
