@@ -34,7 +34,7 @@ public class Main {
             // output[1] = probabilitat que sigui 'smile'
             // L'ordre és 'non_smile', 'smile' perquè s'ordena el nom de les carpetes alfabèticament
 
-            INDArray predictionArray = Nd4j.argMax(output, 1) 
+            INDArray predictionArray = Nd4j.argMax(output, 1);
             // predictionArray array d'un sol element amb l'index de la probabilitat més alta de 'output'
 
             int predictedClass = predictionArray.getInt(0);
