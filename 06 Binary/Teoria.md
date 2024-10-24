@@ -90,7 +90,9 @@ Podeu provar si teniu les llibreries PyTorch i l'acceleració a través de GPU a
 # O bé, python ./ai_utilCheck.py
 ```
 
-## Classificació binària
+<br/><br/>
+
+# Classificació binària
 
 La **classificació binària** és un tipus de problema d'aprenentatge automàtic on un model assigna una de dues etiquetes possibles a cada entrada. Per exemple:
 
