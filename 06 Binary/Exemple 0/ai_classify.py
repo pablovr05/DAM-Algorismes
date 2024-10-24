@@ -9,9 +9,6 @@ from PIL import Image
 from pathlib import Path
 from tqdm import tqdm
 
-MODEL_PATH = 'iscat_model.pth'
-TYPES_PATH = 'iscat_classes.json'
-
 # Imatges de test amb les seves etiquetes
 test_images = [
     ["./data/test/img14469279.jpg", "non_cat"],
@@ -65,16 +62,29 @@ test_images = [
     ["./data/test/img99363609.jpg", "non_cat"]
 ]
 
+# Carregar configuració
+with open('iscat_config.json', 'r') as f:
+    config = json.load(f)
+
 def create_model(num_classes):
     """Crear el mateix model que fem servir per entrenar"""
     model = resnet18(weights=None)
     num_ftrs = model.fc.in_features
     model.fc = nn.Sequential(
-        nn.Dropout(0.5),
-        nn.Linear(num_ftrs, 1),
+        nn.Dropout(config['model_params']['dropout_rate']),
+        nn.Linear(num_ftrs, config['model_params']['num_output']),
         nn.Sigmoid()
     )
     return model
+
+def get_transform():
+    """Obtenir les mateixes transformacions que fem servir per validació"""
+    return transforms.Compose([
+        transforms.Resize(tuple(config['image_size'])),
+        transforms.ToTensor(),
+        transforms.Normalize(mean=config['normalize_mean'], 
+                           std=config['normalize_std'])
+    ])
 
 def load_model(model_path, num_classes, device):
     """Carregar el model amb els pesos entrenats"""
@@ -90,14 +100,6 @@ def load_model(model_path, num_classes, device):
     model = model.to(device)
     model.eval()
     return model
-
-def get_transform():
-    """Obtenir les mateixes transformacions que fem servir per validació"""
-    return transforms.Compose([
-        transforms.Resize((224, 224)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
-    ])
 
 def evaluate_model(model, test_images, transform, class_names, device):
     """Avaluar el model en el conjunt de test"""
@@ -146,12 +148,11 @@ def main():
         print(f"Using: '{device}' (not accelerated)")
     
     # Carregar classes
-    with open(TYPES_PATH, 'r') as f:
-        class_names = json.load(f)
+    class_names = config['classes']
     print(f"Classes: {class_names}")
     
     # Preparar model i transformacions
-    model = load_model(MODEL_PATH, len(class_names), device)
+    model = load_model(config['model_path'], len(class_names), device)
     transform = get_transform()
     
     # Avaluar model

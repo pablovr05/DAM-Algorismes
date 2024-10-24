@@ -9,25 +9,86 @@ from torchvision import datasets, transforms
 from torchvision.models import resnet18, ResNet18_Weights
 from tqdm import tqdm
 
-# Constants
-MODEL_PATH = 'iscat_model.pth'
-TYPES_PATH = 'iscat_classes.json'
-BATCH_SIZE = 16
-EPOCHS = 25
-LEARNING_RATE = 0.0001
-VALIDATION_SPLIT = 0.2
+# Configuració
+config = {
+    "config_path": "iscat_config.json",
+    "model_path": "iscat_model.pth",
+    "training": {
+        "batch_size": 16,
+        "epochs": 25,
+        "learning_rate": 0.0001,
+        "validation_split": 0.2
+    },
+    "image_size": [224, 224],
+    "early_stopping": {
+        "patience": 10,
+        "min_delta": 0
+    },
+    "reduce_lr_on_plateau": {
+        "mode": "min",
+        "factor": 0.1,
+        "patience": 5
+    },
+    "normalize_mean": [0.485, 0.456, 0.406],
+    "normalize_std": [0.229, 0.224, 0.225],
+    "model_params": {
+        "dropout_rate": 0.5,
+        "num_output": 1
+    },
+    "classes": []
+}
+
+EPOCHS = config['training']['epochs']
 
 # Transformacions
 transform = transforms.Compose([
-    transforms.Resize((224, 224)),
+    transforms.Resize(tuple(config['image_size'])),
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+    transforms.Normalize(mean=config['normalize_mean'], std=config['normalize_std'])
 ])
 
-def initialize_early_stopping(patience=7, min_delta=0):
+def create_model():
+    model = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
+    
+    # Congelar capes
+    for param in list(model.parameters())[:-4]:
+        param.requires_grad = False
+        
+    num_ftrs = model.fc.in_features
+    model.fc = nn.Sequential(
+        nn.Dropout(config['model_params']['dropout_rate']),
+        nn.Linear(num_ftrs, config['model_params']['num_output']),
+        nn.Sigmoid()
+    )
+    return model
+
+def create_data_loaders():
+    print("Carregant dataset...")
+    full_dataset = datasets.ImageFolder('./data/train', transform=transform)
+    
+    if len(full_dataset.classes) != 2:
+        raise ValueError("El dataset ha de tenir exactament 2 classes per classificació binària")
+    
+    val_size = int(config['training']['validation_split'] * len(full_dataset))
+    train_size = len(full_dataset) - val_size
+    train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
+    
+    train_loader = DataLoader(train_dataset, 
+                            batch_size=config['training']['batch_size'], 
+                            shuffle=True, 
+                            num_workers=2)
+    val_loader = DataLoader(val_dataset, 
+                          batch_size=config['training']['batch_size'], 
+                          shuffle=False, 
+                          num_workers=2)
+    
+    print(f"Dataset carregat: {train_size} imatges d'entrenament, {val_size} de validació")
+    return train_loader, val_loader, full_dataset.classes
+
+def initialize_early_stopping():
     return {
-        "patience": patience,
-        "min_delta": min_delta,
+        "patience": config['early_stopping']['patience'],
+        "min_delta": config['early_stopping']['min_delta'],
         "counter": 0,
         "best_loss": None,
         "early_stop": False
@@ -42,38 +103,6 @@ def check_early_stopping(state, val_loss):
         if state["counter"] >= state["patience"]:
             state["early_stop"] = True
     return state["early_stop"]
-
-def create_data_loaders():
-    print("Carregant dataset...")
-    full_dataset = datasets.ImageFolder('./data/train', transform=transform)
-    
-    if len(full_dataset.classes) != 2:
-        raise ValueError("El dataset ha de tenir exactament 2 classes per classificació binària")
-    
-    val_size = int(VALIDATION_SPLIT * len(full_dataset))
-    train_size = len(full_dataset) - val_size
-    train_dataset, val_dataset = random_split(full_dataset, [train_size, val_size])
-    
-    train_loader = DataLoader(train_dataset, batch_size=BATCH_SIZE, shuffle=True, num_workers=2)
-    val_loader = DataLoader(val_dataset, batch_size=BATCH_SIZE, shuffle=False, num_workers=2)
-    
-    print(f"Dataset carregat: {train_size} imatges d'entrenament, {val_size} de validació")
-    return train_loader, val_loader, full_dataset.classes
-
-def create_model():
-    model = resnet18(weights=ResNet18_Weights.IMAGENET1K_V1)
-    
-    # Congelar capes
-    for param in list(model.parameters())[:-4]:
-        param.requires_grad = False
-        
-    num_ftrs = model.fc.in_features
-    model.fc = nn.Sequential(
-        nn.Dropout(0.5),
-        nn.Linear(num_ftrs, 1),  # Una única sortida per classificació binària
-        nn.Sigmoid()  # Sigmoid per obtenir probabilitat entre 0 i 1
-    )
-    return model
 
 def train_one_epoch(model, train_loader, criterion, optimizer, device, epoch):
     model.train()
@@ -137,18 +166,24 @@ def main():
     
     train_loader, val_loader, classes = create_data_loaders()
     print(f"Classes trobades: {classes}")
+    config['classes'] = classes
     
-    with open(TYPES_PATH, 'w') as f:
-        json.dump(classes, f)
+    # Guardar la configuració (i les classes) per poder fer servir el model (ai_classify.py)
+    with open(config['config_path'], "w", encoding="utf-8") as f:
+        json.dump(config, f, ensure_ascii=False, indent=4)
     
     model = create_model()
     model = model.to(device)
     print(f"Model creat amb {sum(p.numel() for p in model.parameters() if p.requires_grad)} pesos i biaixos")
     
     criterion = nn.BCELoss()  # Binary Cross Entropy per classificació binària
-    optimizer = optim.AdamW(model.parameters(), lr=LEARNING_RATE, weight_decay=0.01)
-    scheduler = optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.1, patience=5)
-    early_stopping_state = initialize_early_stopping(patience=10)
+    optimizer = optim.AdamW(model.parameters(), lr=config['training']['learning_rate'], weight_decay=0.01)
+    scheduler = optim.lr_scheduler.ReduceLROnPlateau(
+        optimizer, 
+        mode=config['reduce_lr_on_plateau']['mode'], 
+        factor=config['reduce_lr_on_plateau']['factor'], 
+        patience=config['reduce_lr_on_plateau']['patience'])
+    early_stopping_state = initialize_early_stopping()
     
     best_val_acc = 0.0
     for epoch in range(EPOCHS):
@@ -168,7 +203,7 @@ def main():
                 'optimizer_state_dict': optimizer.state_dict(),
                 'val_acc': val_acc,
                 'val_loss': val_loss,
-            }, MODEL_PATH)
+            }, config['model_path'])
         
         if check_early_stopping(early_stopping_state, val_loss):
             print("Early stopping activat")
