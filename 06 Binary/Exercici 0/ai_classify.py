@@ -22,7 +22,7 @@ test_images = [
 ]
 
 # Carregar configuració
-with open('iscat_config.json', 'r') as f:
+with open('smiling_config.json', 'r') as f:
     config = json.load(f)
 
 # TODO: Resta del codi

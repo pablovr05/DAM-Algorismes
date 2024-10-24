@@ -134,6 +134,30 @@ Igualment, a l'**"Exemple 0"**, tenim dos programes **Python**:
 
 **Nota**: Les dades es guarden en un **.zip** per no tenir centenars d'arxius al projecte.
 
+# Paràmetres
+
+Cal entendre aquests conceptes:
+
+- **Accuracy**: és la fiabilitat de la xarxa, és a dir el % de vegades que dóna una resposta correcta. A més pròxim a 100% millor.
+
+- **Epoch**: és cada vegada que es repeteix un entrenament/validació de l'entrenament
+
+- **Millor model**: cada Epoch genera un nou model que es valida, si és el millor que hem trobat el guardem
+
+- **Early stopping**: Comparació per deixar d'entrenar la xarxa si veiem que ja no millora o que està empitjorant
+
+- **Patience**: Cops que repetim un Epoch sense millorar abans de provocar l'**early stopping**
+
+- **Image size**: Mida a la que s'entrenen les imatges, que és prou gran com per fer un bon entrenament però prou petita com perquè l'entrenament vagi ràpid i no trigui hores
+
+Paràmetres més específics:
+
+- **Batch size**: significa el número de vegades que processa mostres abans d'actualitzar els pessos de les neurones
+
+- **Learning rate**: valor amb el que es modifiquen els pesos per intentar millorar el model, segons si hem encertat o fallat la predicció (un valor 0.0001 vol dir que es modifiquen molt poc)
+
+- **Validation split**: defineix quina part de les dades es dedica a entrenament i quina a validació. 0.2 vol dir que un 20% del total de dades disponibles es dedicarà a validar l'entrenament per decidir si la xarxa de l'últim EPOCH és millor o pitjor que la que hem guardat com a millor.
+
 ## Entrenament amb PyTorch
 
 Per entrenar una xarxa amb PyTorch seguim els següents passos:
