@@ -8,7 +8,9 @@ required_libraries = [
     "torchvision",
     "torchaudio",
     "Pillow",
-    "tqdm"
+    "tqdm",
+    "pandas",
+    "scikit-learn"
 ]
 
 def check_and_suggest_installation():
