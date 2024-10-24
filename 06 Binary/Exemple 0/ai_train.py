@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+import os
 import json
+import shutil
+import zipfile
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -39,6 +42,7 @@ config = {
 }
 
 EPOCHS = config['training']['epochs']
+DATA_FOLDER = './data/training'
 
 # Transformacions
 # La variable transform defineix una sèrie de transformacions 
@@ -53,6 +57,21 @@ transform = transforms.Compose([
     # Normalitza els valors del tensor utilitzant la mitjana i la desviació estàndard especificades
     transforms.Normalize(mean=config['normalize_mean'], std=config['normalize_std'])
 ])
+
+# Treu les dades d'entrenament del zip
+def decompress_data_zip():
+    # Esborra la carpeta d'entrenament
+    if os.path.exists(DATA_FOLDER):
+        shutil.rmtree(DATA_FOLDER)
+
+    # Descomprimeix l'arxiu que conté les carpetes de test
+    zip_filename = './data/training.zip'
+    extract_to = './data/'
+    with zipfile.ZipFile(zip_filename, 'r') as zipf:
+        for member in zipf.namelist():
+            # Filtra per ignorar carpetes ocultes i per extreure només la carpeta 'test'
+            if member.startswith('training/') and not member.startswith('__MACOSX/'):
+                zipf.extract(member, extract_to)
 
 # La funció create_model crea una versió modificada de la xarxa ResNet18, 
 # utilitzant pesos preentrenats a partir d'ImageNet.
@@ -83,13 +102,13 @@ def create_model():
     # Retornar el model modificat
     return model
 
-# La funció create_data_loaders carrega imatges des de la carpeta ./data/train 
+# La funció create_data_loaders carrega imatges des de la carpeta DATA_FOLDER
 # i les prepara per ser utilitzades durant l'entrenament i validació del model.
 def create_data_loaders():
     print("Loading dataset...")
     
-    # Càrrega del conjunt de dades des de la carpeta './data/train' aplicant les transformacions definides a 'transform'
-    full_dataset = datasets.ImageFolder('./data/train', transform=transform)
+    # Càrrega del conjunt de dades des de la carpeta DATA_FOLDER aplicant les transformacions definides a 'transform'
+    full_dataset = datasets.ImageFolder(DATA_FOLDER, transform=transform)
     
     # Comprovar si el dataset té exactament 2 classes, ja que s'espera una classificació binària
     if len(full_dataset.classes) != 2:
@@ -175,7 +194,7 @@ def train_one_epoch(model, train_loader, criterion, optimizer, device, epoch):
     total = 0
     
     # Barra de progrés per visualitzar l'avanç de l'entrenament a cada epoch
-    pbar = tqdm(train_loader, desc=f"Epoch {epoch}/{EPOCHS} [Train]")
+    pbar = tqdm(train_loader, desc=f"Epoch {epoch}/{EPOCHS} [Training]")
     for inputs, labels in pbar:
         # Moure les dades d'entrada i les etiquetes al dispositiu (CPU o GPU)
         inputs = inputs.to(device)
@@ -234,7 +253,7 @@ def validate(model, val_loader, criterion, device, epoch):
     # Desactiva el càlcul dels gradients, ja que no es necessita durant l'avaluació
     with torch.no_grad():
         # Barra de progrés per visualitzar l'avanç de l'avaluació
-        pbar = tqdm(val_loader, desc=f"Epoch {epoch}/{EPOCHS} [Val]")
+        pbar = tqdm(val_loader, desc=f"Epoch {epoch}/{EPOCHS} [Validate]")
         for inputs, labels in pbar:
             # Moure les dades d'entrada i les etiquetes al dispositiu (CPU o GPU)
             inputs = inputs.to(device)
@@ -268,6 +287,9 @@ def validate(model, val_loader, criterion, device, epoch):
     return total_loss/len(val_loader), 100.*correct/total
 
 def main():
+    # Descomprimir les dades d'entrenament
+    decompress_data_zip()
+
     # Configurar el dispositiu (GPU si està disponible, sinó CPU)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
     if device.type == "cuda" or device.type == "mps":
@@ -338,6 +360,10 @@ def main():
         if check_early_stopping(early_stopping_state, val_loss):
             print("Early stopping activated")
             break
+
+    # Esborrar la carpeta amb les dades d'entrenament
+    if os.path.exists(DATA_FOLDER):
+        shutil.rmtree(DATA_FOLDER)
 
 if __name__ == "__main__":
     main()

@@ -9,4 +9,7 @@
     "[dart]": {
         "editor.formatOnSave": true
     },
+    "files.watcherExclude": {
+        "**/data/**": true
+    }
 }
