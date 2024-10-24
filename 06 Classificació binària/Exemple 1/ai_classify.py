@@ -117,7 +117,6 @@ def evaluate_model(model, test_texts, vectorizer, class_names, device):
 def main():
     # Configurar dispositiu
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
-    
     if device.type == "cuda" or device.type == "mps":
         print(f"Using device: {device} (GPU accelerated)")
     else:

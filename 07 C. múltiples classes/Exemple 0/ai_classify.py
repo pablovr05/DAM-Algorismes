@@ -236,8 +236,8 @@ def main():
     # Descomprimir les dades de test
     decompress_data_zip("testing")
 
+    # Configurar el dispositiu (GPU si està disponible, sinó CPU)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
-    
     if device.type == "cuda" or device.type == "mps":
         print(f"Using device: {device} (GPU accelerated)")
     else:

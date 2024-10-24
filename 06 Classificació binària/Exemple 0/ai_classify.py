@@ -210,8 +210,6 @@ def main():
 
     # Configurar dispositiu
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
-    
-    # Mostrar quin dispositiu s'està utilitzant (GPU o CPU)
     if device.type == "cuda" or device.type == "mps":
         print(f"Using device: {device} (GPU accelerated)")
     else:

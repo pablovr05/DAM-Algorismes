@@ -207,8 +207,11 @@ def validate(model, val_loader, criterion, device, epoch):
 
 def main():
     # Set device
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(f"Using device: {device}")
+    device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
+    if device.type == "cuda" or device.type == "mps":
+        print(f"Using device: {device} (GPU accelerated)")
+    else:
+        print(f"Using device: {device} (CPU based)")
     
     # Create data loaders
     train_loader, val_loader, vectorizer = create_data_loaders(config['csv_path'])
