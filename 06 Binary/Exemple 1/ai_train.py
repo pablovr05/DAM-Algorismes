@@ -40,8 +40,8 @@ config = {
     "classes": ["ham", "spam"]
 }
 
-# Custom Dataset for SMS messages
-class SMSDataset(Dataset):
+# Custom Dataset for text messages
+class TextDataset(Dataset):
     def __init__(self, texts, labels, vectorizer):
         self.texts = texts
         self.labels = labels
@@ -108,8 +108,8 @@ def create_data_loaders(csv_path):
     val_labels = val_labels.reset_index(drop=True)
     
     # Create datasets
-    train_dataset = SMSDataset(train_texts, train_labels, vectorizer)
-    val_dataset = SMSDataset(val_texts, val_labels, vectorizer)
+    train_dataset = TextDataset(train_texts, train_labels, vectorizer)
+    val_dataset = TextDataset(val_texts, val_labels, vectorizer)
     
     # Create dataloaders
     train_loader = DataLoader(
