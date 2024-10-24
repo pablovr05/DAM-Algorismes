@@ -11,8 +11,8 @@ from tqdm import tqdm
 
 # Configuració
 config = {
-    "config_path": "iscat_config.json",
-    "model_path": "iscat_model.pth",
+    "config_path": "smiling_config.json",
+    "model_path": "smiling_model.pth",
     "training": {
         "batch_size": 16,
         "epochs": 25,
