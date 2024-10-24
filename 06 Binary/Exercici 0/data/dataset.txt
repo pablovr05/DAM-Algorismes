@@ -1,5 +1,0 @@
-Dataset from:
-https://www.kaggle.com/datasets/chazzer/smiling-or-not-face-data
-
-License:
-CC0: Public Domain
