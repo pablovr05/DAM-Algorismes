@@ -23,12 +23,10 @@ def load_random_test_texts(csv_path, num_samples=50):
     df = pd.read_csv(csv_path)
     
     # Convertir etiquetes a "ham" o "spam" segons l'arxiu de configuració
-    unique_labels = df['v1'].unique()
-    label_mapping = {label: label for label in unique_labels}
     texts = df[['v2', 'v1']].rename(columns={'v2': 'text', 'v1': 'label'})
     
     # Seleccionar 50 mostres aleatòries
-    test_texts = texts.sample(n=num_samples, random_state=42).values.tolist()
+    test_texts = texts.sample(n=num_samples).values.tolist()
     return test_texts
 
 # Crea una nova instància del model TextClassifier
@@ -133,7 +131,7 @@ def main():
     test_texts = load_random_test_texts(config['csv_path'])
     
     # Carregar vectorizer del fitxer guardat
-    with open(config['vocab_path'], 'r') as f:
+    with open(config['vocab_path'], 'r', encoding='utf-8') as f:
         vocab = json.load(f)
     vectorizer = CountVectorizer(vocabulary=vocab)
     
