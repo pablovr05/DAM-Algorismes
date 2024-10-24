@@ -142,7 +142,7 @@ Per entrenar una xarxa amb PyTorch seguim els següents passos:
 - Preparar el model 
     En el cas d'imatges de l'exemple fem servir **ResNet18**
     Definim la sortida com a binària amb **Sigmoid**
-- Guardar la configuració del model per poder-la llegir al fer la classificació
+- Guardar la configuració del model per poder-la llegir al fer la classificació en un arxiu **".json"**
 - Definim que cada EPOCH d'entrenament tindrà dues fases
     **Entrenament** escull dades aleatories per entrenar
     **Validació** valida el nou model amb dades aleatòries
@@ -156,7 +156,7 @@ Per entrenar una xarxa amb PyTorch seguim els següents passos:
 - Definir 'early stopping' que permet aturar l'entrenament si veu que jan o millora o inclús empitjora
 - Definir què fa cada 'EPOCH', bàsicament fer l'entrenament
 - Definir com es valida cada 'EPOCH', passar mostres a la última xarxa entrenada per veure si té més encerts que la millor trobada (i si té més encerts definir-la com a millor xarxa)
-- Acabar l'entrenament guardant la millor xarxa de totes les entrenades a cada EPOCH
+- Acabar l'entrenament guardant la millor xarxa de totes les entrenades a cada EPOCH en un arxiu **".pth"**
 - Esborrar la carpeta d'entrenament
 
 ## Classificació amb PyTorch
