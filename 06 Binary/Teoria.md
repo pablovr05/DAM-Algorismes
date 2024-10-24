@@ -140,6 +140,10 @@ Igualment, a l'**"Exemple 0"**, tenim dos programes **Python**:
 
 Cal entendre aquests conceptes:
 
+- **Device**: és el dispositiu que farà les operacions matemàtiques, si diu (GPU accelerated) anirà més ràpid.
+
+- **Model**: és el model de la xarxa entrenada, que farem servir per predir noves imatges (o textos, ...)
+
 - **Accuracy**: és la fiabilitat de la xarxa, és a dir el % de vegades que dóna una resposta correcta. A més pròxim a 100% millor.
 
 - **Epoch**: és cada vegada que es repeteix un entrenament/validació de l'entrenament
