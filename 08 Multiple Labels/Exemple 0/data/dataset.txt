@@ -1,0 +1,5 @@
+Model
+https://www.kaggle.com/datasets/gonzalorecioc/color-polygon-images
+
+License
+CC0: Public Domain
