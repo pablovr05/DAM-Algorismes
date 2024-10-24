@@ -110,7 +110,7 @@ def evaluate_model(model, test_texts, vectorizer, class_names, device):
             })
             
             # Mostrar resultat en consola amb format clar
-            print(f"Text: {text[:30]}..., Prediction: {confidence:.2%} = {"'"+predicted_label+"'":9} ({"'"+true_label+"'":9} > {'correct' if is_correct else 'wrong'})")    
+            print(f"Text: {text[:30].ljust(30)}..., Prediction: {f'{confidence:.2%}'.rjust(8)} = {"'"+predicted_label+"'":6} ({"'"+true_label+"'":6} > {'correct' if is_correct else 'wrong'})")    
     
     return correct, total
 
