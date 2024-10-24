@@ -37,7 +37,7 @@ config = {
         "factor": 0.1,
         "patience": 3
     },
-    "classes": ["ham", "spam"]
+    "classes": []
 }
 
 # TODO: Rest of the code

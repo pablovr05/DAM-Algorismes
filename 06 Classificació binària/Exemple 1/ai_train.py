@@ -37,7 +37,7 @@ config = {
         "factor": 0.1,
         "patience": 3
     },
-    "classes": ["ham", "spam"]
+    "classes": []
 }
 
 # Custom Dataset for text messages
