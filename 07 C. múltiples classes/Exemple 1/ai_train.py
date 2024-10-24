@@ -17,6 +17,10 @@ config = {
     "model_path": "news_model.pth",
     "vocab_path": "news_vocab.json",
     "csv_path": "./data/news.csv",
+    "csv_cloumn_names": {
+        "class": "category",
+        "text": "body"
+    },
     "training": {
         "batch_size": 32,
         "epochs": 25,
@@ -39,7 +43,7 @@ config = {
     "classes": []
 }
 
-def create_news_model(input_size, hidden_size, dropout_rate, num_classes):
+def create_model(input_size, hidden_size, dropout_rate, num_classes):
     """Crea el model de xarxa neuronal per a classificació multi-classe."""
     model = nn.Sequential(
         nn.Linear(input_size, hidden_size),
@@ -59,14 +63,16 @@ def create_data_loaders():
     df = pd.read_csv(config['csv_path'])
     
     # Identify unique categories and create label encoder
-    unique_categories = sorted(df['category'].unique())
+    column_class = config['csv_cloumn_names']['class']
+    column_text = config['csv_cloumn_names']['text']
+    unique_categories = sorted(df[column_class].unique())
     label_encoder = {cat: idx for idx, cat in enumerate(unique_categories)}
     config['classes'] = unique_categories
     
     # Convert labels using the encoder
-    labels = df['category'].map(label_encoder).values
-    texts = df['body'].values
-    
+    labels = df[column_class].map(label_encoder).values
+    texts = df[column_text].values
+
     # Create and fit the vectorizer
     vectorizer = CountVectorizer(max_features=5000)
     vectorized_texts = vectorizer.fit_transform(texts).toarray()
@@ -269,7 +275,7 @@ def train_and_evaluate():
     save_config_and_vocab(vectorizer, label_encoder)
     
     # Crear el model
-    model = create_news_model(
+    model = create_model(
         input_size=len(vectorizer.vocabulary_),
         hidden_size=config['model_params']['hidden_size'],
         dropout_rate=config['model_params']['dropout_rate'],
@@ -320,8 +326,8 @@ def main():
     # Guardar la configuració (amb classes)
     save_config_and_vocab(vectorizer, label_encoder)
     
-    # Crear el model utilitzant la funció `create_news_model`
-    model = create_news_model(
+    # Crear el model utilitzant la funció `create_model`
+    model = create_model(
         input_size=len(vectorizer.vocabulary_),
         hidden_size=config['model_params']['hidden_size'],
         dropout_rate=config['model_params']['dropout_rate'],

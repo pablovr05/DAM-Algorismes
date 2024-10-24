@@ -3,6 +3,10 @@
     "model_path": "news_model.pth",
     "vocab_path": "news_vocab.json",
     "csv_path": "./data/news.csv",
+    "csv_cloumn_names": {
+        "class": "category",
+        "text": "body"
+    },
     "training": {
         "batch_size": 32,
         "epochs": 25,

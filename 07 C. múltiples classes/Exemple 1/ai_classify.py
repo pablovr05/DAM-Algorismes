@@ -23,7 +23,9 @@ def load_random_test_texts(csv_path, num_samples=50):
     df = pd.read_csv(csv_path)
     
     # Utilitzar les columnes correctes del dataset
-    texts = df[['body', 'category']].rename(columns={'body': 'text', 'category': 'label'})
+    column_class = config['csv_cloumn_names']['class']
+    column_text = config['csv_cloumn_names']['text']
+    texts = df[[column_text, column_class]].rename(columns={'body': column_text, 'category': column_class})
     
     # Seleccionar 50 mostres aleatòries
     test_texts = texts.sample(n=num_samples).values.tolist()
