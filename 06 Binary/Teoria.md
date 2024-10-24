@@ -132,3 +132,39 @@ Igualment, a l'**"Exemple 0"**, tenim dos programes **Python**:
 
 - **"iscat_model.pth"** que conté la xarxa entrenada durant la fase d'entrenament, i és l'encarregada de classificar noves fotos
 
+**Nota**: Les dades es guarden en un **.zip** per no tenir centenars d'arxius al projecte.
+
+## Entrenament amb PyTorch
+
+Per entrenar una xarxa amb PyTorch seguim els següents passos:
+
+- Preparar les dades (descomprimir l'arxiu .zip)
+- Preparar el model 
+    En el cas d'imatges de l'exemple fem servir **ResNet18**
+    Definim la sortida com a binària amb **Sigmoid**
+- Guardar la configuració del model per poder-la llegir al fer la classificació
+- Definim que cada EPOCH d'entrenament tindrà dues fases
+    **Entrenament** escull dades aleatories per entrenar
+    **Validació** valida el nou model amb dades aleatòries
+    Això permet descartar el model si és pitjor que el de l'anterior EPOCH
+- Carregar les dades 
+    Ho fem amb els **loaders** per optimitzar l'entrenament
+    Definim una mida d'imatges a entrenar
+    Diem que les imatges s'agafin en un ordre aleatori
+    Diem quantes mostres s'han d'agafar en cada bloc d'entrenament
+    Igual per les mostres de validació ...
+- Definir 'early stopping' que permet aturar l'entrenament si veu que jan o millora o inclús empitjora
+- Definir què fa cada 'EPOCH', bàsicament fer l'entrenament
+- Definir com es valida cada 'EPOCH', passar mostres a la última xarxa entrenada per veure si té més encerts que la millor trobada (i si té més encerts definir-la com a millor xarxa)
+- Acabar l'entrenament guardant la millor xarxa de totes les entrenades a cada EPOCH
+- Esborrar la carpeta d'entrenament
+
+## Classificació amb PyTorch
+
+Per classificar objectes en una xarxa entrenada amb PyTorch:
+
+- Si n'hi ha, descomprimir les dades a classificar
+- Crear el model fent servir la configuració d'entrenament
+- Definir les transformacions perquè coincideixin amb les de l'entrenament
+- Carregar el model de l'arxiu **".pth"** que farà la classificació
+- Evaluar les dades a classificar segons el model

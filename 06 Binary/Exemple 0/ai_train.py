@@ -59,18 +59,18 @@ transform = transforms.Compose([
 ])
 
 # Treu les dades d'entrenament del zip
-def decompress_data_zip():
-    # Esborra la carpeta d'entrenament
+def decompress_data_zip(type):
+    # Esborra la carpeta de test
     if os.path.exists(DATA_FOLDER):
         shutil.rmtree(DATA_FOLDER)
 
     # Descomprimeix l'arxiu que conté les carpetes de test
-    zip_filename = './data/training.zip'
+    zip_filename = f"./data/{type}.zip"
     extract_to = './data/'
     with zipfile.ZipFile(zip_filename, 'r') as zipf:
         for member in zipf.namelist():
-            # Filtra per ignorar carpetes ocultes i per extreure només la carpeta 'test'
-            if member.startswith('training/') and not member.startswith('__MACOSX/'):
+            # Filtra per ignorar carpetes ocultes i per extreure només la carpeta
+            if member.startswith(f"{type}/") and not member.startswith('__MACOSX/'):
                 zipf.extract(member, extract_to)
 
 # La funció create_model crea una versió modificada de la xarxa ResNet18, 
@@ -288,7 +288,7 @@ def validate(model, val_loader, criterion, device, epoch):
 
 def main():
     # Descomprimir les dades d'entrenament
-    decompress_data_zip()
+    decompress_data_zip("training")
 
     # Configurar el dispositiu (GPU si està disponible, sinó CPU)
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")

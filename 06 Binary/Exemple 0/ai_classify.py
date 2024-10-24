@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
+import os
 import json
+import shutil
+import zipfile
 import torch
 import torch.nn as nn
 from torchvision import transforms
@@ -9,62 +12,79 @@ from PIL import Image
 from pathlib import Path
 from tqdm import tqdm
 
+DATA_FOLDER = './data/testing'
+
 # Imatges de test amb les seves etiquetes
 test_images = [
-    ["./data/test/img14469279.jpg", "non_cat"],
-    ["./data/test/img15019810.jpg", "non_cat"],
-    ["./data/test/img16615685.jpg", "non_cat"],
-    ["./data/test/img16745259.jpg", "cat"],
-    ["./data/test/img17242442.jpg", "cat"],
-    ["./data/test/img21960791.jpg", "non_cat"],
-    ["./data/test/img22921893.jpg", "cat"],
-    ["./data/test/img23001964.jpg", "non_cat"],
-    ["./data/test/img27753996.jpg", "non_cat"],
-    ["./data/test/img30802655.jpg", "cat"],
-    ["./data/test/img32929134.jpg", "non_cat"],
-    ["./data/test/img34040492.jpg", "cat"],
-    ["./data/test/img37438645.jpg", "non_cat"],
-    ["./data/test/img38446080.jpg", "cat"],
-    ["./data/test/img43753560.jpg", "non_cat"],
-    ["./data/test/img44113566.jpg", "cat"],
-    ["./data/test/img46733274.jpg", "non_cat"],
-    ["./data/test/img47486374.jpg", "cat"],
-    ["./data/test/img48140375.jpg", "cat"],
-    ["./data/test/img49165968.jpg", "cat"],
-    ["./data/test/img50470376.jpg", "cat"],
-    ["./data/test/img53355576.jpg", "cat"],
-    ["./data/test/img55000620.jpg", "cat"],
-    ["./data/test/img57107487.jpg", "cat"],
-    ["./data/test/img58115239.jpg", "non_cat"],
-    ["./data/test/img62846124.jpg", "cat"],
-    ["./data/test/img63161136.jpg", "non_cat"],
-    ["./data/test/img69539582.jpg", "cat"],
-    ["./data/test/img69679487.jpg", "non_cat"],
-    ["./data/test/img69957115.jpg", "non_cat"],
-    ["./data/test/img69968821.jpg", "non_cat"],
-    ["./data/test/img70610683.jpg", "non_cat"],
-    ["./data/test/img70610683.jpg", "non_cat"],
-    ["./data/test/img72202194.jpg", "non_cat"],
-    ["./data/test/img75381857.jpg", "non_cat"],
-    ["./data/test/img75918332.jpg", "cat"],
-    ["./data/test/img76888003.jpg", "cat"],
-    ["./data/test/img77688616.jpg", "non_cat"],
-    ["./data/test/img79053052.jpg", "cat"],
-    ["./data/test/img83842359.jpg", "cat"],
-    ["./data/test/img83918667.jpg", "cat"],
-    ["./data/test/img84146180.jpg", "non_cat"],
-    ["./data/test/img90037107.jpg", "cat"],
-    ["./data/test/img93578086.jpg", "cat"],
-    ["./data/test/img95378073.jpg", "non_cat"],
-    ["./data/test/img95996327.jpg", "non_cat"],
-    ["./data/test/img96295260.jpg", "non_cat"],
-    ["./data/test/img96872108.jpg", "cat"],
-    ["./data/test/img99363609.jpg", "non_cat"]
+    [f"{DATA_FOLDER}/img14469279.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img15019810.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img16615685.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img16745259.jpg", "cat"],
+    [f"{DATA_FOLDER}/img17242442.jpg", "cat"],
+    [f"{DATA_FOLDER}/img21960791.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img22921893.jpg", "cat"],
+    [f"{DATA_FOLDER}/img23001964.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img27753996.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img30802655.jpg", "cat"],
+    [f"{DATA_FOLDER}/img32929134.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img34040492.jpg", "cat"],
+    [f"{DATA_FOLDER}/img37438645.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img38446080.jpg", "cat"],
+    [f"{DATA_FOLDER}/img43753560.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img44113566.jpg", "cat"],
+    [f"{DATA_FOLDER}/img46733274.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img47486374.jpg", "cat"],
+    [f"{DATA_FOLDER}/img48140375.jpg", "cat"],
+    [f"{DATA_FOLDER}/img49165968.jpg", "cat"],
+    [f"{DATA_FOLDER}/img50470376.jpg", "cat"],
+    [f"{DATA_FOLDER}/img53355576.jpg", "cat"],
+    [f"{DATA_FOLDER}/img55000620.jpg", "cat"],
+    [f"{DATA_FOLDER}/img57107487.jpg", "cat"],
+    [f"{DATA_FOLDER}/img58115239.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img62846124.jpg", "cat"],
+    [f"{DATA_FOLDER}/img63161136.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img69539582.jpg", "cat"],
+    [f"{DATA_FOLDER}/img69679487.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img69957115.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img69968821.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img70610683.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img70610683.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img72202194.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img75381857.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img75918332.jpg", "cat"],
+    [f"{DATA_FOLDER}/img76888003.jpg", "cat"],
+    [f"{DATA_FOLDER}/img77688616.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img79053052.jpg", "cat"],
+    [f"{DATA_FOLDER}/img83842359.jpg", "cat"],
+    [f"{DATA_FOLDER}/img83918667.jpg", "cat"],
+    [f"{DATA_FOLDER}/img84146180.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img90037107.jpg", "cat"],
+    [f"{DATA_FOLDER}/img93578086.jpg", "cat"],
+    [f"{DATA_FOLDER}/img95378073.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img95996327.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img96295260.jpg", "non_cat"],
+    [f"{DATA_FOLDER}/img96872108.jpg", "cat"],
+    [f"{DATA_FOLDER}/img99363609.jpg", "non_cat"]
 ]
 
 # Carregar configuració
 with open('iscat_config.json', 'r') as f:
     config = json.load(f)
+
+# Treu les dades de test del zip
+def decompress_data_zip(type):
+    # Esborra la carpeta de test
+    if os.path.exists(DATA_FOLDER):
+        shutil.rmtree(DATA_FOLDER)
+
+    # Descomprimeix l'arxiu que conté les carpetes de test
+    zip_filename = f"./data/{type}.zip"
+    extract_to = './data/'
+    with zipfile.ZipFile(zip_filename, 'r') as zipf:
+        for member in zipf.namelist():
+            # Filtra per ignorar carpetes ocultes i per extreure només la carpeta
+            if member.startswith(f"{type}/") and not member.startswith('__MACOSX/'):
+                zipf.extract(member, extract_to)
 
 # Crea una nova instància del model ResNet18 sense pesos. 
 # Aquesta configuració s'utilitza per construir el mateix 
@@ -185,6 +205,9 @@ def evaluate_model(model, test_images, transform, class_names, device):
     return correct, total
 
 def main():
+    # Descomprimir les dades de test
+    decompress_data_zip("testing")
+
     # Configurar dispositiu
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
     
@@ -214,6 +237,9 @@ def main():
     print(f"Hits: {correct}")
     print(f"Accuracy: {accuracy:.2%}")
 
+    # Esborrar la carpeta amb les dades de test
+    if os.path.exists(DATA_FOLDER):
+        shutil.rmtree(DATA_FOLDER)
 
 if __name__ == "__main__":
     main()
