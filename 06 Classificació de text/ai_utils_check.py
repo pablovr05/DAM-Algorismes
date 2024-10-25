@@ -11,7 +11,8 @@ required_libraries = [
     "tqdm",
     "pandas",
     "scikit-learn",
-    "numpy"
+    "numpy",
+    "transformers"
 ]
 
 def check_and_suggest_installation():
