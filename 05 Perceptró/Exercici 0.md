@@ -12,9 +12,12 @@
 
 Fes servir el 'perceptron' per instanciar 3 perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
 
-Hauràs de fer un arxiu **"main_matrix.py"** que entreni els 3 perceptrons següents, i validi el seu funcionament detectant les matrius amb linies d'entre les 512 possibles.
+Hauràs de fer un arxiu **"main_matrix.py"** que entreni els 3 perceptrons següents, i validi el seu funcionament detectant les matrius amb linies d'entre les 512 possibles amb diferents **EPOCH**.
 
 És a dir, has de validar la sortida per les 512 matrius i mostrar el % d'encert.
+
+- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 50%?
+- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 80%?
 
 - **perceptronDiagonal** detecta si hi ha una linia diagonal:
 
@@ -39,12 +42,8 @@ Hauràs de fer un arxiu **"main_matrix.py"** que entreni els 3 perceptrons segü
 0 0 0          0 0 0          1 1 1
 ```
 
-Entrena els perceptrons amb diferents valors **EPOCH**.
-
 Comprova el percentatge d'encert de cada perceptró per diferents entrades i mostra els resultats d'executar l'algorisme amb diferents matrius aleatòries.
 
-- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 50%?
-- A partir de quants EPOCH cada perceptró té una fiabilitat de més del 80%?
 
 **Nota**: Fes servir la següent funció per generar totes les combinacions de matrius possibles. 
 
