@@ -17,6 +17,10 @@ config = {
     "model_path": "hamorspam_model.pth",
     "vocab_path": "hamorspam_vocab.json",
     "csv_path": "./data/hamorspam.csv",
+    "csv_cloumn_names": {
+        "class": "v1",
+        "text": "v2"
+    },
     "training": {
         "batch_size": 32,
         "epochs": 25,
@@ -84,14 +88,16 @@ def create_data_loaders(csv_path):
     df = pd.read_csv(csv_path)
     
     # Identify unique labels in the CSV and update config classes
-    unique_labels = df['v1'].unique()
-    config['classes'] = list(unique_labels)
+    column_class = config['csv_cloumn_names']['class']
+    column_text = config['csv_cloumn_names']['text']
+    unique_categories = sorted(df[column_class].unique())
+    label_encoder = {cat: idx for idx, cat in enumerate(unique_categories)}
+    config['classes'] = unique_categories
     
-    # Convert labels to binary (0 for ham, 1 for spam)
-    label_mapping = {label: idx for idx, label in enumerate(config['classes'])}
-    labels = df['v1'].map(label_mapping).astype(int)
-    texts = df['v2'].values
-    
+    # Convert labels using the encoder
+    labels = df[column_class].map(label_encoder).values
+    texts = df[column_text].values
+
     # Create and fit the vectorizer
     vectorizer = CountVectorizer(max_features=5000)
     vectorizer.fit(texts)
