@@ -92,10 +92,11 @@ Entrades -> Pesos i Biaix -> Funció d'activació -> Sortida
 
 Un cop hem dissenyat el nostre perceptró, segons les necessitats de classificació de dades que tenim, hem de procedir amb:
 
-Fes anar l'exemple amb:
+Fes anar l'exemple Pyton amb:
 
 ```bash
-./run.sh com.project.Main
+./main_lines.py
+# (O a windows python main_lines.py)
 ```
 
 **Fase d'entrenament**: 
@@ -130,46 +131,30 @@ En aquest exemple veiem com es fa servir un perceptró per classificar números 
 
 - Si la suma és positiva o zero, classifica com a "senar"; si és negativa, com a "parell".
 
-```java
-    private static final int EPOCHS = 10;
+- Prova l'exemple amb diferents EPOCHS (0, 1, 2, ...) per veure el % d'encert.
 
-    public static void main(String[] args) {
+```python
+EPOCHS = 10
+LEARNING_RATE = 0.1
+INPUT_SIZE = 4
 
-        // Crea una instància d'un perceptró
-        // inputSize = 4 que son els bits 0/1 de l'entrada
-        // activationType = "relu" que és fer una suma simple de cada entrada pel seu pes
-        // learningRate = 0.1 que defineix el canvi dels pesos durant l'entrenament, en cas d'error/encert
-        Perceptron perceptron = new Perceptron(4, "relu", 0.1);
+inputs = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 1],
+    [0, 0, 1, 0],
+    [0, 0, 1, 1],
+    [0, 1, 0, 0],
+    [0, 1, 0, 1],
+    [0, 1, 1, 0],
+    [0, 1, 1, 1]
+]
 
-        // Valors d'entrada possibles (4 bits)
-        int[][] inputs = {
-            {0, 0, 0, 0}, // Num 0
-            {0, 0, 0, 1}, // Num 1
-            {0, 0, 1, 0}, // Num 2
-            {0, 0, 1, 1}, // Num 3
-            {0, 1, 0, 0}, // Num 4
-            {0, 1, 0, 1}, // Num 5
-            {0, 1, 1, 0}, // Num 6
-            {0, 1, 1, 1}  // Num 7
-        };
+labels = [0, 1, 0, 1, 0, 1, 0, 1]
 
-        // Als labels 0 és parell, 1 imparell
-        int[] labels = {
-            0, // Num 0 -> label 0 parell 
-            1, // Num 1 -> label 1 imparell
-            0, // Num 2 -> label 0 parell
-            1, // Num 3 -> label 1 imparell
-            0, // Num 4 -> label 0 parell
-            1, // Num 5 -> label 1 imparell
-            0, // Num 6 -> label 0 parell
-            1  // Num 7 -> label 1 imparell
-        };
+weights = initialize_weights(INPUT_SIZE)
+bias = 0.0
 
-        // Fes l'entrenament del perceptró
-        perceptron.train(inputs, labels, EPOCHS);
-        
-        // Medeix la precissió del perceptró
-        double accuracy = perceptron.testAccuracy(inputs, labels);
-        System.out.println("\nPercentatge d'encert del Perceptró entrenat amb " + EPOCHS + " EPOCHS: " + accuracy + "%\n");
-    }
+weights, bias = train(weights, bias, inputs, labels, LEARNING_RATE, EPOCHS)
+accuracy = test_accuracy(weights, bias, inputs, labels)
+print(f"\nPercentatge d'encert del Perceptró entrenat amb {EPOCHS} EPOCHS: {accuracy}%\n")
 ```

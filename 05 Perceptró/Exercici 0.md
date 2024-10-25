@@ -10,7 +10,11 @@
 
 # Exercici 0
 
-Fes servir la classe 'Perceptron' per instanciar 3 perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
+Fes servir el 'perceptron' per instanciar 3 perceptrons que classifiquin matrius de 3x3 entre matrius que tenen linies o no tenen linies.
+
+Hauràs de fer un arxiu **"main_matrix.py"** que entreni els 3 perceptrons següents, i validi el seu funcionament detectant les matrius amb linies d'entre les 512 possibles.
+
+És a dir, has de validar la sortida per les 512 matrius i mostrar el % d'encert.
 
 - **perceptronDiagonal** detecta si hi ha una linia diagonal:
 
@@ -52,7 +56,36 @@ Veureu que genera matrius d'una dimensió amb nou valors, és a dir:
 0 1 0
 ```
 
+Per tant la següent matriu activa el perceptró "diagonal":
+
+```text
+1 0 0
+0 1 0 es representa com: 1 0 0 0 1 0 0 0 1
+0 0 1
+```
+
+<br/>
+
+----
+
+<br/>
+
 Funció per generar totes les matrius possibles:
+
+**Pyton:**
+```python
+def generate_all_matrices():
+    matrices = []
+    
+    for i in range(512):
+        binary = format(i, '09b')
+        matrix = [int(bit) for bit in binary]
+        matrices.append(matrix)
+    
+    return matrices
+```
+
+**Java:**
 ```java
 public static List<int[]> generateAllMatrices() {
     List<int[]> matrices = new ArrayList<>();
@@ -76,10 +109,3 @@ public static List<int[]> generateAllMatrices() {
 }
 ```
 
-Per tant la següent matriu activa el perceptró "diagonal":
-
-```text
-1 0 0
-0 1 0 es representa com: 1 0 0 0 1 0 0 0 1
-0 0 1
-```
