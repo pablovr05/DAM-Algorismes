@@ -1,0 +1,57 @@
+{
+    "paths": {
+        "data": "./data/data_books.csv",
+        "data_relation": "./data/data_books_tags.csv",
+        "data_labels": "./data/data_tags.csv",
+        "trained_network": "model_network.pth",
+        "metadata": "model_metadata.json"
+    },
+    "columns": {
+        "categories": "category",
+        "text": "body"
+    },
+    "model_definition": {
+        "input_size": 5000,
+        "layers": [
+            {
+                "type": "Linear",
+                "size": 256,
+                "activation": "ReLU",
+                "dropout": 0.5
+            },
+            {
+                "type": "Linear",
+                "size": 128,
+                "activation": "ReLU",
+                "dropout": 0.5
+            },
+            {
+                "type": "Linear",
+                "size": "num_categories"
+            }
+        ]
+    },
+    "pre_processing": {
+        "max_features": 5000
+    },
+    "training": {
+        "batch_size": 32,
+        "epochs": 25,
+        "learning_rate": 0.001,
+        "validation_split": 0.2
+    },
+    "optimization": {
+        "early_stopping": {
+            "patience": 5,
+            "min_delta": 0
+        },
+        "scheduler": {
+            "reduce_lr_on_plateau": {
+                "mode": "min",
+                "factor": 0.1,
+                "patience": 3,
+                "metric": "val_loss"
+            }
+        }
+    }
+}

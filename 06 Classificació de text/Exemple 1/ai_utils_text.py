@@ -84,6 +84,60 @@ def create_data_loaders(config):
     
     return unique_categories, train_loader, val_loader, vectorizer, label_encoder
 
+def create_data_loaders_multi_label(config):
+    print("Loading dataset...")
+    
+    df_data = pd.read_csv(config['paths']['data'])
+    df_labels = pd.read_csv(config['paths']['data_labels'])
+    df_relation = pd.read_csv(config['paths']['data_relation'])
+    
+    tags_dict = df_labels.set_index('tag_id')['tag_name'].to_dict()
+    
+    book_tags = df_relation.groupby('goodreads_book_id')['tag_id'].apply(list)
+    book_tags = book_tags.apply(lambda tags: [tags_dict[t] for t in tags if t in tags_dict])
+    
+    df_data['tags'] = df_data['best_book_id'].map(book_tags)
+    df_data.dropna(subset=['tags'], inplace=True)
+    
+    unique_categories = sorted(set(tag for tags in df_data['tags'] for tag in tags))
+    label_encoder = {tag: idx for idx, tag in enumerate(unique_categories)}
+    
+    # Convert tags to multi-label binary array
+    def encode_tags(tags):
+        encoded = np.zeros(len(unique_categories))
+        for tag in tags:
+            encoded[label_encoder[tag]] = 1
+        return encoded
+    
+    df_data['encoded_tags'] = df_data['tags'].apply(encode_tags)
+    
+    texts = df_data['title'].values
+    labels = np.stack(df_data['encoded_tags'].values)
+    
+    vectorizer = CountVectorizer(max_features=config['pre_processing']['max_features'])
+    vectorized_texts = vectorizer.fit_transform(texts).toarray()
+    
+    vectorized_texts = adjust_input_shape(vectorized_texts, config['model_definition']['input_size'])
+    
+    train_texts, val_texts, train_labels, val_labels = train_test_split(
+        vectorized_texts, labels, 
+        test_size=config['training']['validation_split'], 
+        random_state=42
+    )
+    
+    train_texts = torch.tensor(train_texts, dtype=torch.float32)
+    train_labels = torch.tensor(train_labels, dtype=torch.float32)
+    val_texts = torch.tensor(val_texts, dtype=torch.float32)
+    val_labels = torch.tensor(val_labels, dtype=torch.float32)
+    
+    train_dataset = torch.utils.data.TensorDataset(train_texts, train_labels)
+    val_dataset = torch.utils.data.TensorDataset(val_texts, val_labels)
+    
+    train_loader = DataLoader(train_dataset, batch_size=config['training']['batch_size'], shuffle=True)
+    val_loader = DataLoader(val_dataset, batch_size=config['training']['batch_size'], shuffle=False)
+    
+    return unique_categories, train_loader, val_loader, vectorizer, label_encoder
+
 def initialize_early_stopping(config):
     return {
         "patience": config['optimization']['early_stopping']['patience'],
@@ -93,7 +147,7 @@ def initialize_early_stopping(config):
         "early_stop": False
     }
 
-def load_config(path_config, mode="train"):
+def load_config(path_config, mode="train", multi_label=False):
     # Load the configuration from file
     with open(path_config, 'r') as f:
         config = json.load(f)
@@ -107,8 +161,11 @@ def load_config(path_config, mode="train"):
     
     if mode == "train":
         # Create data loaders 
-        unique_categories, train_loader, val_loader, vectorizer, label_encoder = create_data_loaders(config)       
-        
+        if not multi_label:
+            unique_categories, train_loader, val_loader, vectorizer, label_encoder = create_data_loaders(config)       
+        else:
+            unique_categories, train_loader, val_loader, vectorizer, label_encoder = create_data_loaders_multi_label(config)     
+
         # Create model
         model = create_model_from_config(config, num_categories=len(unique_categories))
         model.to(device)

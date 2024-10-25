@@ -1,0 +1,5 @@
+Dataset
+https://www.kaggle.com/datasets/zygmunt/goodbooks-10k
+
+License
+CC BY-SA 4.0
