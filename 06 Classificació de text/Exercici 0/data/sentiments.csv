@@ -1,0 +1,501 @@
+sentiment,comentari
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
+positiu,Gran millora respecte al model anterior!
+negatiu,M'han enviat un producte defectuós.
+positiu,La millor compra que he fet aquest any!
+negatiu,"Qualitat terrible, va deixar de funcionar després d'una setmana."
+positiu,Molt fàcil d'usar i fiable.
+negatiu,Va ser difícil de configurar i no funcionava bé.
+positiu,"Disseny elegant, molt modern."
+negatiu,"Sembla barat i fràgil, molt insatisfet."
+positiu,"Qualitat de construcció excepcional, molt resistent."
+negatiu,"Es va trencar gairebé immediatament, molt decebut."
+positiu,"Atenció al client fantàstica, molt atent."
+negatiu,El pitjor servei d'atenció al client que he vist mai.
+positiu,Molt intuïtiu i fàcil d'usar.
+negatiu,Complicat i gens fàcil d'utilitzar.
+positiu,"L'embalatge era excel·lent, va arribar amb seguretat."
+negatiu,"Embalatge danyat, peces que faltaven."
+positiu,"Exactament el que buscava, m'encanta!"
+negatiu,Completament diferent del que esperava.
+positiu,El recomanaria a altres sense dubtar-ho!
+negatiu,No el recomanaria a ningú.
+positiu,"M'encanta aquest producte, és fantàstic!"
+negatiu,És el pitjor que he comprat mai.
+positiu,"Servei absolutament increïble, molt content!"
+negatiu,"Atenció al client terrible, estic decebut."
+positiu,Ho recomanaria als meus amics sense dubtar-ho.
+negatiu,"No val els diners, molt mala experiència."
+positiu,"Tot funciona perfectament, estic molt satisfet."
+negatiu,"Es va trencar després d'un dia, qualitat molt baixa."
+positiu,"Gran relació qualitat-preu, estic impressionat."
+negatiu,"Això és una estafa, no malgastis els teus diners."
+positiu,"La nova versió és excel·lent, estic emocionat!"
+negatiu,"Em penedeixo d'haver-lo comprat, totalment inútil."
+positiu,"Enviament ràpid, gran atenció al client!"
+negatiu,"Mai vaig rebre la meva comanda, experiència horrible."
+positiu,"El gust és increïble, el compraria de nou!"
+negatiu,"El menjar estava fred i sense sabor, molt decebedor."
+positiu,"S'ajusta perfectament, just el que necessitava!"
+negatiu,"Totalment desajustat, no com es descriu."
+positiu,"Una compra encantadora, molt satisfet!"
+negatiu,"Vull que em tornin els diners, qualitat extremadament baixa."
