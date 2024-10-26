@@ -246,7 +246,7 @@ A partir d'aquÃ­, mira quants cops s'ha classificat correctament i genera estadÃ
 
 Text: You made my day. Do have a great day too.         ..., Prediction:  99.74% = "ham"  ("ham"  > correct)
 Text: I was just callin to say hi. Take care bruv!      ..., Prediction:  99.89% = "ham"  ("ham"  > correct)
-Text: Id onluy matters when getting on from offcampus   ..., Prediction:  98.97% = "ham"  ("ham"  > correct)
+Text: Thanks for your subscription to Ringtone UK       ..., Prediction:  98.97% = "spam" ("spam" > correct)
 Text: Ok... Let u noe when i leave my house.            ..., Prediction:  99.99% = "ham"  ("ham"  > correct)
 
 Validation of 50 examples: success: 50/50, accuracy: 100.00, Error rate: 0.00
