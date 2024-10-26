@@ -1,6 +1,0 @@
-Dataset from:
-https://www.kaggle.com/datasets/marquis03/vehicle-classification
-
-License:
-Apache 2.0
-
