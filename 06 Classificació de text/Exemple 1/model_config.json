@@ -1,55 +1,54 @@
 {
     "paths": {
-        "data": "./data/news.csv",
+        "data": "./data/news.csv", 
         "trained_network": "model_network.pth",
         "metadata": "model_metadata.json"
     },
     "columns": {
         "categories": "category",
-        "text": "body"
+        "text": "body" 
     },
-    "model_definition": {
-        "input_size": 5000,
+    "model_configuration": {
+        "is_binary": false,
+        "max_len": 128,
         "layers": [
             {
-                "type": "Linear",
-                "size": 256,
-                "activation": "ReLU",
-                "dropout": 0.5
+                "type": "Embedding",
+                "vocab_size": 30522,
+                "embedding_dim": 100
+            },
+            {
+                "type": "Dropout",
+                "p": 0.2
             },
             {
                 "type": "Linear",
-                "size": 128,
-                "activation": "ReLU",
-                "dropout": 0.5
+                "in_features": 100,
+                "out_features": 64
+            },
+            {
+                "type": "ReLU"
+            },
+            {
+                "type": "Dropout",
+                "p": 0.2
             },
             {
                 "type": "Linear",
-                "size": "num_categories"
+                "in_features": 64,
+                "out_features": "unique_categories"
             }
         ]
     },
-    "pre_processing": {
-        "max_features": 5000
-    },
     "training": {
         "batch_size": 32,
-        "epochs": 25,
-        "learning_rate": 0.001,
-        "validation_split": 0.2
+        "epochs": 32,
+        "learning_rate": 0.001
     },
     "optimization": {
         "early_stopping": {
-            "patience": 5,
+            "patience": 8,
             "min_delta": 0
-        },
-        "scheduler": {
-            "reduce_lr_on_plateau": {
-                "mode": "min",
-                "factor": 0.1,
-                "patience": 3,
-                "metric": "val_loss"
-            }
         }
     }
 }

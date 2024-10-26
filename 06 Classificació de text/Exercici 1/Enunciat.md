@@ -25,13 +25,14 @@ Fixa't que les columnes que tenen informació important per fer la classificaci�
 **Nota**: La classificació de la tasca 1 ha de ser de l'estil:
 
 ```text
-... 49 resultats previs ...
+... resultats previs ...
 
-Text: @AmericanAir Can't unload flight #3322 because jet..., Prediction: 99.82% = "negative" ("negative" > correct)
-negat: 1.00 ,neutr: 0.00 ,posit: 0.00
+Text: @JetBlue Of course U know I would like 2 lay you d..., Prediction:  65.82% = "positive" ("positive" > correct)
+Text: @VirginAmerica heyyyy guyyyys.. been trying to get..., Prediction:  97.45% = "negative" ("negative" > correct)
+Text: @united with the purchase of my ticket i am entitl..., Prediction:  94.62% = "negative" ("negative" > correct)
+Text: @united @gg8929 Ladies and gents - United Airlines..., Prediction:  61.59% = "neutral" ("neutral" > correct)
+Text: Welp. “@JetBlue: Our fleet's on fleek. http://t.co..., Prediction:  82.76% = "neutral" ("neutral" > correct)
+Text: @VirginAmerica Applied for Status Match on Feb 1. ..., Prediction:  91.78% = "negative" ("negative" > correct)
 
-Global results:
-  Total texts: 50
-  Hits: 46
-  Accuracy: 92.00%
+Validation of 50 examples: success: 43/50, accuracy: 86.00, Error rate: 0.14
 ```

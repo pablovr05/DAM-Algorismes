@@ -1,218 +1,136 @@
-import numpy as np
 import torch
 import torch.nn as nn
-import json
-import pandas as pd
-from torch.utils.data import DataLoader, random_split, TensorDataset
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.model_selection import train_test_split
+from torch.utils.data import Dataset
 
-def create_model_from_config(config, num_categories):
-    layers = []
-    input_size = config['model_definition']['input_size']
-    
-    for layer_config in config['model_definition']['layers']:
-        if layer_config['type'] == "Linear":
-            output_size = layer_config['size']
-            if output_size == "num_categories":
-                output_size = num_categories
-            
-            layers.append(nn.Linear(input_size, output_size))
-            
-            if 'activation' in layer_config and layer_config['activation'] == "ReLU":
-                layers.append(nn.ReLU())
-            
-            if 'dropout' in layer_config:
-                layers.append(nn.Dropout(layer_config['dropout']))
-            
-            input_size = output_size
+class ModelConfig:
+    def __init__(self, config_file, labels):
+        # Configuració general del model
+        self.is_binary = config_file['model_configuration']['is_binary']
+        self.class_labels = labels
+        self.num_classes = 2 if self.is_binary else len(self.class_labels)
 
-    return nn.Sequential(*layers)
+        # Configuració de camins
+        self.data_path = config_file['paths']['data']
+        self.trained_network_path = config_file['paths']['trained_network']
+        self.metadata_path = config_file['paths']['metadata']
 
-def adjust_input_shape(vectorized_data, target_size=5000):
-    if vectorized_data.shape[1] < target_size:
-        padding = np.zeros((vectorized_data.shape[0], target_size - vectorized_data.shape[1]))
-        vectorized_data = np.hstack((vectorized_data, padding))
-    return vectorized_data
+        # Configuració de columnes
+        self.column_categories = config_file['columns']['categories']
+        self.column_text = config_file['columns']['text']
 
-def create_data_loaders(config):
-    print("Loading dataset...")
-    
-    # Read CSV file
-    df = pd.read_csv(config['paths']['data'])
-    
-    # Identify unique categories and create label encoder
-    column_categories = config['columns']['categories']
-    column_text = config['columns']['text']
-    unique_categories = sorted(df[column_categories].unique())
-    label_encoder = {cat: idx for idx, cat in enumerate(unique_categories)}
-    
-    # Convert labels using the encoder
-    labels = df[column_categories].map(label_encoder).values
-    texts = df[column_text].values
-
-    # Create and fit the vectorizer
-    vectorizer = CountVectorizer(max_features=config['pre_processing']['max_features'])
-    vectorized_texts = vectorizer.fit_transform(texts).toarray()
-
-    # Adjust input shape if needed
-    vectorized_texts = adjust_input_shape(vectorized_texts, config['model_definition']['input_size'])
-    
-    # Split data into train and validation sets (manca aquesta part)
-    train_texts, val_texts, train_labels, val_labels = train_test_split(
-        vectorized_texts, labels, 
-        test_size=config['training']['validation_split'], 
-        random_state=42
-    )
+        # Configuració del model i l'optimitzador
+        self.batch_size = config_file['training']['batch_size']
+        self.epochs = config_file['training']['epochs']
+        self.learning_rate = config_file['training']['learning_rate']
+        self.max_len = config_file['model_configuration']['max_len']
         
-    # Convert to PyTorch tensors
-    train_texts = torch.tensor(train_texts, dtype=torch.float32)
-    train_labels = torch.tensor(train_labels, dtype=torch.long)
-    val_texts = torch.tensor(val_texts, dtype=torch.float32)
-    val_labels = torch.tensor(val_labels, dtype=torch.long)
-    
-    # Create Tensor datasets
-    train_dataset = torch.utils.data.TensorDataset(train_texts, train_labels)
-    val_dataset = torch.utils.data.TensorDataset(val_texts, val_labels)
-    
-    # Create DataLoaders
-    train_loader = DataLoader(train_dataset, batch_size=config['training']['batch_size'], shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=config['training']['batch_size'], shuffle=False)
-    
-    print(f"Dataset loaded: {len(train_texts)} training articles, {len(val_texts)} validation articles")
-    print(f"Categories: {', '.join(unique_categories)}")
-    
-    return unique_categories, train_loader, val_loader, vectorizer, label_encoder
+        # Configuració de capes dinàmiques
+        self.layers = config_file['model_configuration']['layers']
+        
+        # Configuració d'early stopping
+        self.patience = config_file['optimization']['early_stopping']['patience']
+        self.min_delta = config_file['optimization']['early_stopping']['min_delta']
 
-def create_data_loaders_multi_label(config):
-    print("Loading dataset...")
+# Classes del model
+class ModelDataset(Dataset):
+    def __init__(self, texts, labels, tokenizer, max_len):
+        self.texts = texts
+        self.labels = labels
+        self.tokenizer = tokenizer
+        self.max_len = max_len
+        
+    def __len__(self):
+        return len(self.texts)
     
-    df_data = pd.read_csv(config['paths']['data'])
-    df_labels = pd.read_csv(config['paths']['data_labels'])
-    df_relation = pd.read_csv(config['paths']['data_relation'])
-    
-    tags_dict = df_labels.set_index('tag_id')['tag_name'].to_dict()
-    
-    book_tags = df_relation.groupby('goodreads_book_id')['tag_id'].apply(list)
-    book_tags = book_tags.apply(lambda tags: [tags_dict[t] for t in tags if t in tags_dict])
-    
-    df_data['tags'] = df_data['best_book_id'].map(book_tags)
-    df_data.dropna(subset=['tags'], inplace=True)
-    
-    unique_categories = sorted(set(tag for tags in df_data['tags'] for tag in tags))
-    label_encoder = {tag: idx for idx, tag in enumerate(unique_categories)}
-    
-    # Convert tags to multi-label binary array
-    def encode_tags(tags):
-        encoded = np.zeros(len(unique_categories))
-        for tag in tags:
-            encoded[label_encoder[tag]] = 1
-        return encoded
-    
-    df_data['encoded_tags'] = df_data['tags'].apply(encode_tags)
-    
-    texts = df_data['title'].values
-    labels = np.stack(df_data['encoded_tags'].values)
-    
-    vectorizer = CountVectorizer(max_features=config['pre_processing']['max_features'])
-    vectorized_texts = vectorizer.fit_transform(texts).toarray()
-    
-    vectorized_texts = adjust_input_shape(vectorized_texts, config['model_definition']['input_size'])
-    
-    train_texts, val_texts, train_labels, val_labels = train_test_split(
-        vectorized_texts, labels, 
-        test_size=config['training']['validation_split'], 
-        random_state=42
-    )
-    
-    train_texts = torch.tensor(train_texts, dtype=torch.float32)
-    train_labels = torch.tensor(train_labels, dtype=torch.float32)
-    val_texts = torch.tensor(val_texts, dtype=torch.float32)
-    val_labels = torch.tensor(val_labels, dtype=torch.float32)
-    
-    train_dataset = torch.utils.data.TensorDataset(train_texts, train_labels)
-    val_dataset = torch.utils.data.TensorDataset(val_texts, val_labels)
-    
-    train_loader = DataLoader(train_dataset, batch_size=config['training']['batch_size'], shuffle=True)
-    val_loader = DataLoader(val_dataset, batch_size=config['training']['batch_size'], shuffle=False)
-    
-    return unique_categories, train_loader, val_loader, vectorizer, label_encoder
+    def __getitem__(self, idx):
+        text = str(self.texts[idx])
+        category = self.labels[idx]
+        
+        encoding = self.tokenizer(
+            text,
+            add_special_tokens=True,
+            max_length=self.max_len,
+            padding='max_length',
+            truncation=True,
+            return_tensors='pt'
+        )
+        
+        return {
+            'input_ids': encoding['input_ids'].flatten(),
+            'attention_mask': encoding['attention_mask'].flatten(),
+            'category': torch.tensor(category, dtype=torch.long)
+        }
 
-def initialize_early_stopping(config):
-    return {
-        "patience": config['optimization']['early_stopping']['patience'],
-        "min_delta": config['optimization']['early_stopping']['min_delta'],
-        "counter": 0,
-        "best_loss": None,
-        "early_stop": False
-    }
+class ModelClassifier(nn.Module):
+    def __init__(self, config: ModelConfig):
+        super(ModelClassifier, self).__init__()
+        self.config = config
+        layers = []
 
-def load_config(path_config, mode="train", multi_label=False):
-    # Load the configuration from file
-    with open(path_config, 'r') as f:
-        config = json.load(f)
+        for layer_config in config.layers:
+            layer_type = layer_config['type']
+            
+            if layer_type == 'Embedding':
+                layers.append(nn.Embedding(
+                    num_embeddings=layer_config['vocab_size'],
+                    embedding_dim=layer_config['embedding_dim']
+                ))
+            elif layer_type == 'Dropout':
+                layers.append(nn.Dropout(p=layer_config['p']))
+            elif layer_type == 'Linear':
+                num_out_features = layer_config['out_features']
+                if not isinstance(num_out_features, int):
+                    num_out_features = config.num_classes
+                layers.append(nn.Linear(
+                    in_features=layer_config['in_features'],
+                    out_features=num_out_features
+                ))
+            elif layer_type == 'ReLU':
+                layers.append(nn.ReLU())
+
+        self.network = nn.Sequential(*layers)
+
+    def forward(self, input_ids, attention_mask):
+        x = self.network[0](input_ids)
+        masked = x * attention_mask.unsqueeze(-1)
+        x = masked.mean(dim=1)
+        
+        for layer in self.network[1:]:
+            x = layer(x)
+
+        return x
+
+class EarlyStopping:
+    def __init__(self, patience: int = 3, min_delta: float = 0):
+        self.patience = patience
+        self.min_delta = min_delta
+        self.counter = 0
+        self.best_loss = None
+        self.early_stop = False
+        self.best_model = None
+        
+    def __call__(self, val_loss: float, model: nn.Module):
+        if self.best_loss is None:
+            self.best_loss = val_loss
+            self.best_model = model.state_dict().copy()
+        elif val_loss > self.best_loss - self.min_delta:
+            self.counter += 1
+            print(f'EarlyStopping counter: {self.counter} out of {self.patience}')
+            if self.counter >= self.patience:
+                self.early_stop = True
+        else:
+            self.best_loss = val_loss
+            self.best_model = model.state_dict().copy()
+            self.counter = 0
+            
+    def get_best_model(self):
+        return self.best_model
     
-    # Determine the device (MPS, CUDA, or CPU)
+def getDevice():
     device = torch.device("mps" if torch.backends.mps.is_available() else "cuda" if torch.cuda.is_available() else "cpu")
     if device.type == "cuda" or device.type == "mps":
         print(f"Using device: {device} (GPU accelerated)")
     else:
         print(f"Using device: {device} (CPU based)")
     
-    if mode == "train":
-        # Create data loaders 
-        if not multi_label:
-            unique_categories, train_loader, val_loader, vectorizer, label_encoder = create_data_loaders(config)       
-        else:
-            unique_categories, train_loader, val_loader, vectorizer, label_encoder = create_data_loaders_multi_label(config)     
-
-        # Create model
-        model = create_model_from_config(config, num_categories=len(unique_categories))
-        model.to(device)
-        
-        # Initialize early stopping
-        early_stopping_state = initialize_early_stopping(config)
-        
-        return config, unique_categories, model, device, train_loader, val_loader, vectorizer, label_encoder, early_stopping_state
-    
-    elif mode == "classify":
-        # Load model state dict from the provided path
-        model_path = config['paths']['trained_network']
-        checkpoint = torch.load(model_path, map_location=device, weights_only=True)
-        
-        # Load config from the checkpoint to ensure consistency
-        loaded_config = checkpoint.get('config', config)
-
-        # Load metadata
-        with open(loaded_config['paths']['metadata'], 'r') as f:
-            metadata = json.load(f)
-            unique_categories = metadata['unique_categories']
-            label_encoder = metadata['label_encoder']
-            vocab = metadata['vocabulary']
-        
-        # Create vectorizer from saved vocabulary
-        vectorizer = CountVectorizer(vocabulary=vocab)
-        
-        # Create model from config and load state dict
-        model = create_model_from_config(loaded_config, num_categories=len(unique_categories))
-        model.load_state_dict(checkpoint['model_state_dict'])
-        model.to(device)
-        model.eval()  # Set model to evaluation mode
-        
-        return config, model, device, label_encoder, vectorizer
-    
-def save_metadata(unique_categories, vectorizer, label_encoder, metadata_path):
-    # Save vocabulary and label encoder
-    with open(metadata_path, 'w') as f:
-        json.dump({
-            'unique_categories': unique_categories,
-            'label_encoder': label_encoder,
-            'vocabulary': {k: int(v) for k, v in vectorizer.vocabulary_.items()}
-        }, f)
-
-def save_model(model, label_encoder, model_path):
-    print(f"Saving model to {model_path}")
-    torch.save({
-        'model_state_dict': model.state_dict(),
-        'label_encoder': label_encoder
-    }, model_path)
+    return device

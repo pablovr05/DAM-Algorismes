@@ -1,10 +1,17 @@
 #!/usr/bin/env python3
+
 import os
-print("Loading AI libraries ..."); import torch
-import torch.nn as nn
-import torch.optim as optim
+import json
+print("Loading AI libraries ..."); 
 from tqdm import tqdm
-from ai_utils_text import load_config, save_metadata, save_model
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from transformers import BertTokenizer
+from ai_utils_text import ModelConfig, ModelDataset, ModelClassifier, EarlyStopping, getDevice
 
 CONFIG_FILE = "model_config.json"
 
@@ -16,115 +23,135 @@ def clearScreen():
 
 clearScreen()
 
-def train_one_epoch(model, train_loader, criterion, optimizer, device, epoch):
+from tqdm import tqdm
+
+def train_epoch(model, dataloader, optimizer, criterion, device):
     model.train()
     total_loss = 0
     correct = 0
     total = 0
     
-    pbar = tqdm(train_loader, desc=f"Epoch {epoch+1} [Training]")
-    for inputs, labels in pbar:
-        inputs = inputs.to(device)
-        labels = labels.float().to(device)  # Assegura't que les etiquetes siguin floats
+    # Afegeix una barra de progrés
+    for batch in tqdm(dataloader, desc="Training", leave=True, bar_format="{desc}:   {percentage:3.2f}% |{bar:20}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]"):
+        input_ids = batch['input_ids'].to(device)
+        attention_mask = batch['attention_mask'].to(device)
+        labels = batch['category'].to(device)
         
         optimizer.zero_grad()
-        outputs = model(inputs).squeeze()  # Ajusta la forma de la sortida
+        outputs = model(input_ids, attention_mask)
         loss = criterion(outputs, labels)
         
         loss.backward()
         optimizer.step()
         
         total_loss += loss.item()
-        # Calcular precisió: converteix les sortides a 0 o 1
-        predicted = torch.round(torch.sigmoid(outputs))  # Sigmoid per convertir a probabilitats
-        correct += (predicted == labels).sum().item()
+        _, predicted = torch.max(outputs, 1)
         total += labels.size(0)
-        
-        pbar.set_postfix({
-            'loss': f'{total_loss/len(train_loader):.4f}',
-            'acc': f'{100.*correct/total:.2f}%'
-        })
+        correct += (predicted == labels).sum().item()
     
-    return total_loss/len(train_loader), 100.*correct/total
+    accuracy = correct / total
+    return total_loss / len(dataloader), accuracy
 
-def validate(model, val_loader, criterion, device, epoch):
+def evaluate_epoch(model, dataloader, criterion, device):
     model.eval()
     total_loss = 0
     correct = 0
     total = 0
     
     with torch.no_grad():
-        pbar = tqdm(val_loader, desc=f"Epoch {epoch+1} [Validate]")
-        for inputs, labels in pbar:
-            inputs = inputs.to(device)
-            labels = labels.float().to(device)
+        # Afegeix una barra de progrés
+        for batch in tqdm(dataloader, desc="Evaluating", leave=True, bar_format="{desc}: {percentage:3.2f}% |{bar:20}| {n_fmt}/{total_fmt} [{elapsed}<{remaining}, {rate_fmt}]"):
+            input_ids = batch['input_ids'].to(device)
+            attention_mask = batch['attention_mask'].to(device)
+            labels = batch['category'].to(device)
             
-            outputs = model(inputs).squeeze()  # Ajusta la forma de la sortida
+            outputs = model(input_ids, attention_mask)
             loss = criterion(outputs, labels)
             
             total_loss += loss.item()
-            predicted = torch.round(torch.sigmoid(outputs))
-            correct += (predicted == labels).sum().item()
+            _, predicted = torch.max(outputs, 1)
             total += labels.size(0)
-            
-            pbar.set_postfix({
-                'loss': f'{total_loss/len(val_loader):.4f}',
-                'acc': f'{100.*correct/total:.2f}%'
-            })
+            correct += (predicted == labels).sum().item()
     
-    return total_loss/len(val_loader), 100.*correct/total
-
-def check_early_stopping(state, val_loss):
-    if state["best_loss"] is None or val_loss < state["best_loss"] - state["min_delta"]:
-        state["best_loss"] = val_loss
-        state["counter"] = 0
-    else:
-        state["counter"] += 1
-        if state["counter"] >= state["patience"]:
-            state["early_stop"] = True
-    return state["early_stop"]
-
-def configure_scheduler(optimizer, config):
-    return optim.lr_scheduler.ReduceLROnPlateau(
-        optimizer,
-        mode=config['optimization']['scheduler']['reduce_lr_on_plateau']['mode'],
-        factor=config['optimization']['scheduler']['reduce_lr_on_plateau']['factor'],
-        patience=config['optimization']['scheduler']['reduce_lr_on_plateau']['patience']
-    )
+    accuracy = correct / total
+    return total_loss / len(dataloader), accuracy
 
 def main():
 
-    # Load infos for training
-    config, unique_categories, model, device, train_loader, val_loader, vectorizer, label_encoder, early_stopping_state = load_config(CONFIG_FILE, mode="train")
-    
-    # Define loss function and optimizer
-    criterion = nn.BCEWithLogitsLoss()
-    optimizer = optim.Adam(model.parameters(), lr=config['training']['learning_rate'])
-    scheduler = configure_scheduler(optimizer, config)
-    
-    best_val_acc = 0.0
-    
-    # Training loop
-    for epoch in range(config['training']['epochs']):
-        train_loss, train_acc = train_one_epoch(model, train_loader, criterion, optimizer, device, epoch)
-        val_loss, val_acc = validate(model, val_loader, criterion, device, epoch)
-        
-        print(f"Epoch {epoch+1}/{config['training']['epochs']} - "
-              f"Train Loss: {train_loss:.4f}, Train Acc: {train_acc:.2f}% - "
-              f"Val Loss: {val_loss:.4f}, Val Acc: {val_acc:.2f}% - "
-              f"LR: {optimizer.param_groups[0]['lr']:.6f}")
-        
-        scheduler.step(val_loss)
-        
-        if val_acc > best_val_acc:
-            best_val_acc = val_acc
-            save_model(model, label_encoder, config['paths']['trained_network'])
+    # Carregar la configuració
+    with open(CONFIG_FILE) as f:
+        config_file = json.load(f)
 
-        save_metadata(unique_categories, vectorizer, label_encoder, config['paths']['metadata'])   
-   
-        if check_early_stopping(early_stopping_state, val_loss):
-            print("Early stopping activated")
+    column_text = config_file['columns']['text']
+    column_categories = config_file['columns']['categories']
+
+    # Carregar i preprocessar les dades
+    print("Loading data ...")
+    df = pd.read_csv(config_file['paths']['data'], encoding='utf-8')
+    df = df[[column_categories, column_text]]
+    df = df.dropna()
+
+    labels = df[column_categories].unique().tolist()
+    print("Labels:", labels)
+
+    # Configuració del model
+    config = ModelConfig(config_file, labels)
+    
+    le = LabelEncoder()
+    df[column_categories] = le.fit_transform(df[column_categories].astype(str))
+
+    print("Initialize tokenizer...")
+    tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+    VOCAB_SIZE = tokenizer.vocab_size
+
+    # Dividir les dades
+    X_train, X_test, y_train, y_test = train_test_split(
+        df[column_text], df[column_categories], test_size=0.2, random_state=42
+    )
+
+    # Crear datasets i dataloaders
+    train_dataset = ModelDataset(X_train.values, y_train.values, tokenizer, config.max_len)
+    test_dataset = ModelDataset(X_test.values, y_test.values, tokenizer, config.max_len)
+
+    train_loader = DataLoader(train_dataset, batch_size=config.batch_size, shuffle=True)
+    test_loader = DataLoader(test_dataset, batch_size=config.batch_size)
+
+    # Inicialitzar model i components d'entrenament
+    device = getDevice()
+
+    model = ModelClassifier(config).to(device)
+    optimizer = torch.optim.Adam(model.parameters(), lr=config.learning_rate)
+    criterion = nn.CrossEntropyLoss()
+    early_stopping = EarlyStopping(patience=config.patience)
+
+    # Entrenament
+    best_accuracy = 0.0  # Per emmagatzemar la millor precisió observada
+    for epoch in range(config.epochs):
+        
+        print("")
+        
+        # Entrena un nou model i el valora
+        train_loss, train_acc = train_epoch(model, train_loader, optimizer, criterion, device)
+        test_loss, test_acc = evaluate_epoch(model, test_loader, criterion, device)
+        print(f'Epoch {epoch+1}/{config.epochs} (Train: loss: {train_loss:.2f}, accuracy: {train_acc:.2f}) (Eval: loss: {test_loss:.2f}, accuracy: {test_acc:.2f})')
+        
+        # Compara l'ultim model entrenat amb el millor guardat
+        if test_acc > best_accuracy:
+            best_accuracy = test_acc
+            torch.save(model.state_dict(), config_file['paths']['trained_network'])
+            print(f"New best model saved with eval accuracy {(best_accuracy*100):.2f}%")
+
+        # Guarda les metadades
+        metadata = { "categories": labels, "label_encoder": le.classes_.tolist() }
+        with open(config_file['paths']['metadata'], 'w') as metadata_file:
+            json.dump(metadata, metadata_file)
+
+        # Comprova l'early stopping
+        early_stopping(test_loss, model)
+        if early_stopping.early_stop:
+            print("Early stopping triggered")
+            model.load_state_dict(early_stopping.get_best_model())
             break
-   
+
 if __name__ == "__main__":
     main()
