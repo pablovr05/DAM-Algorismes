@@ -10,8 +10,8 @@ required_libraries = [
     "Pillow",
     "tqdm",
     "pandas",
-    "scikit-learn",
     "numpy",
+    "scikit-learn",
     "transformers"
 ]
 
