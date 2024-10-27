@@ -1,14 +1,14 @@
 # Exercici 0
 
-Cal entrenar una xarxa neuronal que permeti classificar si un text mostra un sentiment positiu o negatiu, segons les categories: 
+Cal entrenar una xarxa neuronal que permeti classificar si un text en anglès o no, segons les categories: 
 
-- sentiment,comentari
+- eng, other
 
-Fes servir l'arxiu './data/sentiments.csv'
+Fes servir l'arxiu './data/engorother.csv'
 
 Fixa't que les columnes que tenen informació important per fer la classificació són:
 
-- category, text
+- label, phrase
 
 ## Tasques:
 
@@ -16,10 +16,10 @@ Fixa't que les columnes que tenen informació important per fer la classificaci�
 
 1) Fes un arxiu **"ai_classify.py"** que esculli 50 textos a l'arzar de l'arxiu **"./data/sentiments.csv"** i mostri les estadistiques de classificar-los amb la xarxa de l'arpartat 0
 
-2) Fes un arxiu **"ai_classify_single.py"** que demana per input: "Write something?" i fa servir la xarxa anterior per dir si és 'positiu' o 'negatiu'. Segons el resultat:
+2) Fes un arxiu **"ai_classify_single.py"** que demana per input: "Write something ..." i fa servir la xarxa anterior per dir si s'ha escrit en anglès o en un altre idioma. Segons el resultat:
 
-    - Si és **positiu** mostra. "Sentiment positiu"
-    - Si és **negatiu** mostra. "Sentiment negatiu"
+    - Si és **eng** mostra. "This is English"
+    - Si és **other** mostra. "I don't understand you"
 
 3) Fes un document **"millores.pdf"** en el que expliquins quines configuracions es poden posar a la xarxa per millorar els resultats obtinguts.
 
@@ -30,11 +30,12 @@ Fixa't que les columnes que tenen informació important per fer la classificaci�
 ```text
 ... resultats previs ...
 
-Text: Em penedeixo d'haver-lo comprat, totalment inútil...., Prediction:  69.71% = "negatiu" ("negatiu" > correct)
-Text: El recomanaria a altres sense dubtar-ho!          ..., Prediction:  76.44% = "positiu" ("positiu" > correct)
-Text: Mai vaig rebre la meva comanda, experiència horrib..., Prediction:  78.52% = "negatiu" ("negatiu" > correct)
-Text: Sembla barat i fràgil, molt insatisfet.           ..., Prediction:  59.94% = "negatiu" ("negatiu" > correct)
-Text: La nova versió és excel·lent, estic emocionat!    ..., Prediction:  77.23% = "positiu" ("positiu" > correct)
+Text: What time do you usually have dinner?             ..., Prediction:  91.79% = "eng"  ("eng"  > correct)
+Text: Qual è la password del WiFi?                      ..., Prediction:  91.74% = "other" ("other" > correct)
+Text: The lights are not working                        ..., Prediction:  86.22% = "eng"  ("eng"  > correct)
+Text: La batería está muerta                            ..., Prediction:  96.78% = "other" ("other" > correct)
+Text: L'ascenseur est en panne                          ..., Prediction:  86.23% = "other" ("other" > correct)
+Text: I need to schedule an appointment                 ..., Prediction:  94.27% = "eng"  ("eng"  > correct)
 
 Validation of 50 examples: success: 50/50, accuracy: 100.00, Error rate: 0.00
 ```
